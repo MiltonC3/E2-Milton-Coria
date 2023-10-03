@@ -81,7 +81,7 @@ const userSignup = async (req, res) => {
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Error al registrar los datos!',
+        text: 'Ingresa un correo válido!',
         footer: '<a href="/signup">Registrate</a>'
     })
 </script>`;

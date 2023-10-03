@@ -218,7 +218,7 @@ body::-webkit-scrollbar-thumb {
 .inicio__secServicios {
     height: 50%;
     width: 50%;
-    display: flex; 
+    display: flex;
     flex-direction: column;
 }
 .inicio__title--secServicios {
@@ -697,6 +697,28 @@ body::-webkit-scrollbar-thumb {
 }
 .registrarse__button--form:hover {
     opacity: 1;
+}
+
+/* *********************** PAGINA ADMIN ************************/
+
+.main__admin {
+    width: 100%;
+    height: 40rem;
+}
+.admin__h1 {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+/* *********************** PAGINA CLIENT ************************/
+
+.main__client {
+    width: 100%;
+    height: 40rem;
+}
+.client__h1 {
+    text-align: center;
+    margin-top: 3rem;
 }
 
 /* **************************** FOOTER ******************************** */
