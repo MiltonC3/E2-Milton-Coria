@@ -1,9 +1,10 @@
-const express = require("express");
-const { validationResult } = require("express-validator");
+// const express = require("express");
+// const { validationResult } = require("express-validator");
+// const { login } = require("./signinControllers");
 const { client } = require("../database/conexion");
-const { login } = require("./signinControllers");
 
 const pageSignup = (req, res) => {
+
     const pageTitle = "Crea tu cuenta - Cabañas Bello Atardecer";
 
     const btnNav = `
@@ -27,6 +28,7 @@ const pageSignup = (req, res) => {
 };
 
 const userSignup = async (req, res) => {
+
     const { nombre, nacimiento, correo, pass } = req.body;
 
     const userNew = {

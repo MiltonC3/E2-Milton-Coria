@@ -1,6 +1,8 @@
-const express = require("express");
-const { validationResult } = require("express-validator");
+// const express = require("express");
+// const { validationResult } = require("express-validator");
 const { client } = require("../database/conexion");
+
+let login;
 
 const pageSignin = (req, res) => {
     const pageTitle = "Iniciar sesión - Cabañas Bello Atardecer";
@@ -26,6 +28,8 @@ const pageSignin = (req, res) => {
 };
 
 const userSignin = async (req, res) => {
+    client.connect();
+
     const { correo, pass } = req.body;
 
     const admin = {
@@ -40,7 +44,7 @@ const userSignin = async (req, res) => {
 
     const db = client.db("clientes");
 
-    const login = await db
+    login = await db
         .collection("Cuentas")
         .findOne({ correo: user.correo, pass: user.pass });
 
@@ -74,80 +78,89 @@ const userSignin = async (req, res) => {
 </li>`;
 
         res.render("signin", { alert: error, btnNav: btnNav });
-    } else if (
-        login.correo &&
-        login.pass === user.pass &&
-        login.correo !== admin.correo &&
-        login.pass !== admin.pass
-    ) {
-        const pageTitle = "Bienvenido Cliente - Cabañas Bello Atardecer";
+    } else {
+        console.log("usuario encontrado");
+    }
+    // else if (
+    //         login.correo &&
+    //         login.pass === user.pass &&
+    //         login.correo !== admin.correo &&
+    //         login.pass !== admin.pass
+    //     ) {
+    //         const pageTitle = "Bienvenido Cliente - Cabañas Bello Atardecer";
 
-        const btnNav = `
-<li class="header__li">
-    <a href="/" class="header__a">Inicio</a>
-</li>
-<li class="header__li">
-    <a href="/reservar" class="header__a">Reservar</a>
-</li>
-<li class="header__li">
-    <a href="/ayuda" class="header__a">Ayuda</a>
-</li>
-<li class="header__li li-signin">
-    <a href="/signin" class="header__a header__a--active">Sign In</a>
-</li>
-<li class="header__li li-signup">
-    <a href="/signup" class="header__a">Sign Up</a>
-</li>`;
+    //         const btnNav = `
+    // <li class="header__li">
+    //     <a href="/" class="header__a">Inicio</a>
+    // </li>
+    // <li class="header__li">
+    //     <a href="/reservar" class="header__a">Reservar</a>
+    // </li>
+    //    <li class="header__li">
+    //     <a href="/ayuda" class="header__a">Ayuda</a>
+    // </li>
+    // <li class="header__li li-signin">
+    //     <a href="/signin" class="header__a header__a--active">Sign In</a>
+    // </li>
+    // <li class="header__li li-signup">
+    //     <a href="/signup" class="header__a">Sign Up</a>
+    // </li>`;
 
-        const success = `<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Iniciaste sesión con ${login.nombre}',
-        showConfirmButton: false,
-        timer: 1500
-    })
-</script>`;
+    //         const success = `<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    // <script>
+    //     Swal.fire({
+    //         position: 'top-end',
+    //         icon: 'success',
+    //         title: 'Iniciaste sesión con ${login.nombre}',
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //     })
+    // </script>`;
 
-        res.render("client", { title: pageTitle, btnNav: btnNav, alert: success });
-    } else if (login.correo === admin.correo && login.pass === admin.pass) {
-        const pageTitle = "Bienvenido Admin - Cabañas Bello Atardecer";
+    //         res.render("client", { alert: success, btnNav: btnNav });
+    //     } else if (login.correo === admin.correo && login.pass === admin.pass) {
+    //         const pageTitle = "Bienvenido Admin - Cabañas Bello Atardecer";
 
-        const btnNav = `
-<li class="header__li">
-    <a href="/" class="header__a">Inicio</a>
-</li>
-<li class="header__li">
-    <a href="/reservar" class="header__a">Reservar</a>
-</li>
-<li class="header__li">
-    <a href="/ayuda" class="header__a">Ayuda</a>
-</li>
-<li class="header__li li-signin">
-    <a href="/signin" class="header__a header__a--active">Sign In</a>
-</li>
-<li class="header__li li-signup">
-    <a href="/signup" class="header__a">Sign Up</a>
-</li>`;
+    //         const btnNav = `
+    // <li class="header__li">
+    //     <a href="/" class="header__a">Inicio</a>
+    // </li>
+    // <li class="header__li">
+    //     <a href="/reservar" class="header__a">Reservar</a>
+    // </li>
+    // <li class="header__li">
+    //     <a href="/ayuda" class="header__a">Ayuda</a>
+    // </li>
+    // <li class="header__li li-signin">
+    //     <a href="/signin" class="header__a header__a--active">Sign In</a>
+    // </li>
+    // <li class="header__li li-signup">
+    //     <a href="/signup" class="header__a">Sign Up</a>
+    // </li>`;
 
-        const success = `<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Iniciaste sesión con ${login.nombre}, el cual es administrador',
-        showConfirmButton: false,
-        timer: 1500
-    })
-</script>`;
+    //         const success = `<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    // <script>
+    //     Swal.fire({
+    //            position: 'top-end',
+    //         icon: 'success',
+    //         title: 'Iniciaste sesión con ${login.nombre}: Administrador',
+    //         showConfirmButton: false,
+    //         timer: 1500
+    //     })
+    // </script>`;
 
-        res.render("admin", {
-            title: pageTitle,
-            btnNav: btnNav,
-            alert: success,
-        });
+    //         res.render("admin", {
+    //             title: pageTitle,
+    //             btnNav: btnNav,
+    //             alert: success,
+    //         });
+    //     }
+};
+
+const userFront = async (req, res) => {
+    if (login !== "" && login !== null) {
+        res.json(login);
     }
 };
 
-module.exports = { pageSignin, userSignin };
+module.exports = { pageSignin, userSignin, userFront };

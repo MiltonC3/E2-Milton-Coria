@@ -1,4 +1,5 @@
 const pageInicio = (req, res) => {
+
     const pageTitle = "Cabañas Bello Atardecer - Ojo de Agua, Sgo del Estero";
     const divPortada = `<div class="background">
     <img

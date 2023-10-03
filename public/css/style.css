@@ -4,15 +4,8 @@
     box-sizing: border-box;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
-
 /* ********************** Globales ************************* */
 
-body {
-    background: #1b1b1b;
-    font-family: "Roboto", sans-serif;
-    color: #ffffff;
-}
 body::-webkit-scrollbar {
     width: 15px;
 }
@@ -143,7 +136,8 @@ body::-webkit-scrollbar-thumb {
     align-items: center;
 }
 .inicio__p--secDesign {
-    width: 70%;
+    width: 75%;
+    text-align: justify;
     font-weight: 300;
     position: relative;
 }
@@ -261,23 +255,24 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
     display: flex;
     flex-direction: column;
+    text-align: justify;
     align-items: center;
     justify-content: space-evenly;
 }
-.inicio__p--secServicios {
-    text-align: center;
-    width: 70%;
-    font-weight: 300;
+.inicio__text--secServicios p {
+    font-weight: 200;
+    width: 76%;
 }
-
-.inicio__p--secServicios-s {
-    text-align: center;
-    width: 80%;
-    font-weight: 300;
-    margin-top: 10px;
-    position: relative;
+.inicio__text--secServicios li {
+    font-weight: 200;
     list-style: none;
-    left: 10%;
+    width: 95%;
+    color: #ededed;
+}
+.inicio__p--secServicios-s {
+    color: #ffffff;
+    font-weight: 400;
+    margin-top: 10px;
 }
 
 .inicio__ayuda {
@@ -550,9 +545,11 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
     position: relative;
     text-align: center;
+    font-weight: 200;
 }
 .ayuda__p-s {
     color: #96bfb4;
+    font-weight: 300;
 }
 
 /* *********************** PAGINA INICIAR SESION ************************/
@@ -647,7 +644,7 @@ body::-webkit-scrollbar-thumb {
 
 .main__registrarse {
     display: flex;
-    height: 50rem;
+    height: 60rem;
     width: 100%;
     justify-content: center;
     align-items: center;

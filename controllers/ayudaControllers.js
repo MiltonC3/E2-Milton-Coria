@@ -1,4 +1,5 @@
 const pageAyuda = (req, res) => {
+
     const pageTitle = "Ayuda - Cabañas Bello Atardecer";
 
     const btnNav = `

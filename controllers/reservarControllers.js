@@ -1,4 +1,5 @@
 const pageReservar = (req, res) => {
+    
     const pageTitle = "Reservar - Cabañas Bello Atardecer";
 
     const btnNav = `
