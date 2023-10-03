@@ -8,7 +8,17 @@ const pageInicio = (req, res) => {
     />
 </div>`;
 
-    const btnNav = `<li class="header__li li-signin">
+    const btnNav = `
+<li class="header__li">
+    <a href="/" class="header__a header__a--active">Inicio</a>
+</li>
+<li class="header__li">
+    <a href="/reservar" class="header__a">Reservar</a>
+</li>
+<li class="header__li">
+    <a href="/ayuda" class="header__a">Ayuda</a>
+</li>
+<li class="header__li li-signin">
     <a href="/signin" class="header__a">Sign In</a>
 </li>
 <li class="header__li li-signup">

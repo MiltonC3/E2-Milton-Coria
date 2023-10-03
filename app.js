@@ -10,7 +10,6 @@ const ayudaRoutes = require("./routes/ayudaRoutes");
 const inicioRoutes = require("./routes/inicioRoutes");
 const reservarRoutes = require("./routes/reservarRoutes");
 const signinRoutes = require("./routes/signinRoutes");
-const signoutRoutes = require("./routes/signoutRoutes");
 const signupRoutes = require("./routes/signupRoutes");
 
 const PORT = process.env.PORT;
@@ -30,7 +29,6 @@ app.use(
     inicioRoutes,
     reservarRoutes,
     signinRoutes,
-    signoutRoutes,
     signupRoutes
 );
 

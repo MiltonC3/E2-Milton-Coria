@@ -6,11 +6,21 @@ const { login } = require("./signinControllers");
 const pageSignup = (req, res) => {
     const pageTitle = "Crea tu cuenta - Cabañas Bello Atardecer";
 
-    const btnNav = `<li class="header__li li-signin">
+    const btnNav = `
+<li class="header__li">
+    <a href="/" class="header__a">Inicio</a>
+</li>
+<li class="header__li">
+    <a href="/reservar" class="header__a">Reservar</a>
+</li>
+<li class="header__li">
+    <a href="/ayuda" class="header__a">Ayuda</a>
+</li>
+<li class="header__li li-signin">
     <a href="/signin" class="header__a">Sign In</a>
 </li>
 <li class="header__li li-signup">
-    <a href="/signup" class="header__a">Sign Up</a>
+    <a href="/signup" class="header__a header__a--active">Sign Up</a>
 </li>`;
 
     res.render("signup", { title: pageTitle, btnNav: btnNav });
@@ -46,8 +56,18 @@ const userSignup = async (req, res) => {
     })
 </script>`;
 
-        const btnNav = `<li class="header__li li-signin">
-    <a href="/signin" class="header__a">Sign In</a>
+        const btnNav = `
+<li class="header__li">
+    <a href="/" class="header__a">Inicio</a>
+</li>
+<li class="header__li">
+    <a href="/reservar" class="header__a">Reservar</a>
+</li>
+<li class="header__li">
+    <a href="/ayuda" class="header__a">Ayuda</a>
+</li>
+<li class="header__li li-signin">
+    <a href="/signin" class="header__a header__a--active">Sign In</a>
 </li>
 <li class="header__li li-signup">
     <a href="/signup" class="header__a">Sign Up</a>
@@ -66,11 +86,21 @@ const userSignup = async (req, res) => {
     })
 </script>`;
 
-        const btnNav = `<li class="header__li li-signin">
+        const btnNav = `
+<li class="header__li">
+    <a href="/" class="header__a">Inicio</a>
+</li>
+<li class="header__li">
+    <a href="/reservar" class="header__a">Reservar</a>
+</li>
+<li class="header__li">
+    <a href="/ayuda" class="header__a">Ayuda</a>
+</li>
+<li class="header__li li-signin">
     <a href="/signin" class="header__a">Sign In</a>
 </li>
 <li class="header__li li-signup">
-    <a href="/signup" class="header__a">Sign Up</a>
+    <a href="/signup" class="header__a header__a--active">Sign Up</a>
 </li>`;
 
         res.render("signup", { alert: error, btnNav: btnNav });

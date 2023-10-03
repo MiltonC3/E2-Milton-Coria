@@ -84,7 +84,7 @@ body::-webkit-scrollbar-thumb {
     color: #ffffff;
     opacity: 0.8;
     text-decoration: none;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 400;
     transition: 0.3s all;
 }
@@ -92,19 +92,19 @@ body::-webkit-scrollbar-thumb {
     opacity: 1;
 }
 .header__a--active {
-    color: #e2844e;
     opacity: 1;
 }
 
 .li-signin {
     border: 1px solid rgb(189, 189, 189);
     border-radius: 0.5rem;
-    padding: 5px;
+    padding: 5px 8px 5px 8px;
 }
 .li-signup {
     background: #b87b56;
     border-radius: 0.5rem;
-    padding: 5px;
+    padding: 5px 8px 5px 8px;
+    border: 1px solid rgb(189, 189, 189);
 }
 
 /* ************************ PAGINA INICIO ************************* */
