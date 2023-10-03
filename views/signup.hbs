@@ -1,0 +1,14 @@
+<main class="main__registrarse">
+    <h2 class="registrarse__h2">Crea tu cuenta!</h2>
+    <form action="/signup" method="post" class="registrarse__form">
+        <label for="nombre" class="registrarse__label">Nombre y Apellido:</label>
+        <input type="text" name="nombre" id="nombre" class="registrarse__input" required/>
+        <label for="nacimiento" class="registrarse__label">Fecha de nacimiento:</label>
+        <input type="date" name="nacimiento" id="nacimiento" class="registrarse__input" required/>
+        <label for="correo" class="registrarse__label">Correo electrónico:</label>
+        <input type="email" name="correo" id="correo" class="registrarse__input" required/>
+        <label for="pass" class="registrarse__label">Contraseña:</label>
+        <input type="password" name="pass" id="pass" class="registrarse__input" required minlength="8"/>
+        <button type="submit" class="registrarse__button--form">Crear cuenta</button>
+    </form>
+</main>

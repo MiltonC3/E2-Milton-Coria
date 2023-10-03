@@ -1,0 +1,16 @@
+<main class="main__iniciarse">
+    <h2 class="iniciarse__h2">Bienvenido!</h2>
+    <form action="/signin" method="post" class="iniciarse__form">
+        <label for="correo" class="iniciarse__label">Correo electrónico:</label>
+        <input type="email" name="correo" id="correo" class="iniciarse__input" required/>
+        <label for="pass" class="iniciarse__label">Contraseña:</label>
+        <input type="password" name="pass" id="pass" class="iniciarse__input" required minlength="8"/>
+        <a href="" class="iniciarse__a--form">¿Olvidaste tu contraseña?</a>
+        <button type="submit" class="iniciarse__button--form">Iniciar Sesión</button>
+    </form>
+    <p class="iniciarse__p">o</p>
+    <a href="/signup">
+        <button class="iniciarse__button iniciarse__button--registro">Registrarse</button>
+    </a>
+</main>
+

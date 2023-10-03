@@ -1,0 +1,812 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+/* ********************** Globales ************************* */
+
+body {
+    background: #1b1b1b;
+    font-family: "Roboto", sans-serif;
+    color: #ffffff;
+}
+body::-webkit-scrollbar {
+    width: 15px;
+}
+body::-webkit-scrollbar-track {
+    background: rgb(16, 16, 16);
+}
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(237, 237, 237, 0.147);
+    border-radius: 10px;
+    border: 1px solid rgb(222, 222, 222);
+}
+
+/* ****************** Background Inicio ******************** */
+
+.background {
+    height: 40rem;
+    width: 100%;
+    background: url("../assets/img/inicio-portada.jpg") center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.background__img {
+    z-index: 1;
+    width: 31.25rem;
+    margin-bottom: 2rem;
+}
+
+/* ************************* HEADER ************************* */
+
+.header {
+    height: 4.5rem;
+    position: sticky;
+    background: #1b1b1b;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
+    top: 0px;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+}
+/* -------------------- header logo parte 1-------------------- */
+.header__logo {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+.header__img--logo {
+    width: 2.75rem;
+    margin-left: 1.25rem;
+}
+/* -------------------- header menu parte 2-------------------- */
+.header__nav {
+    width: 50%;
+    height: 100%;
+}
+.header__ul {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: flex-end;
+    margin-right: 0.6rem;
+    list-style: none;
+}
+.header__li {
+    margin-right: 1.25rem;
+}
+.header__a {
+    color: #ffffff;
+    opacity: 0.8;
+    text-decoration: none;
+    font-size: 1.15rem;
+    font-weight: 400;
+    transition: 0.3s all;
+}
+.header__a:hover {
+    opacity: 1;
+}
+.header__a--active {
+    color: #e2844e;
+    opacity: 1;
+}
+
+.li-signin {
+    border: 1px solid rgb(189, 189, 189);
+    border-radius: 0.5rem;
+    padding: 5px;
+}
+.li-signup {
+    background: #b87b56;
+    border-radius: 0.5rem;
+    padding: 5px;
+}
+
+/* ************************ PAGINA INICIO ************************* */
+
+.main__inicio {
+    height: 120rem;
+    display: flex;
+    flex-wrap: wrap;
+    width: 94%;
+    position: relative;
+    left: 3%;
+}
+/* --------------- Sección Design interior & exterior ------------- */
+.inicio__secDesign {
+    height: 50%;
+    width: 50%;
+}
+.inicio__title--secDesign {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+.inicio__h2--secDesign {
+    font-size: 3rem;
+    color: #ffffff;
+    font-weight: 800;
+}
+.inicio__text--secDesign {
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.inicio__p--secDesign {
+    width: 70%;
+    font-weight: 300;
+    position: relative;
+}
+.inicio__reserva {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.inicio__btn--reserva {
+    width: 400px;
+    border-radius: 0.95rem;
+    background-color: #b87b56;
+    height: 3.2rem;
+    border: 0px;
+    font-size: 17px;
+    font-weight: 400;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+.inicio__btn--reserva:hover {
+    background-color: #c27649;
+}
+/* ----------------- Seccion Imágenes Interiores ------------------ */
+.inicio__secInterior {
+    height: 50%;
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}
+.inicio__img--secInterior {
+    width: 35rem;
+    height: 47rem;
+    border-radius: 2rem;
+    mix-blend-mode: lighten;
+}
+.inicio__img1--secInterior {
+    position: relative;
+    top: 6.25rem;
+    right: 1.85rem;
+}
+.inicio__img2--secInterior {
+    position: absolute;
+    right: 12.5rem;
+    top: 12.5rem;
+}
+/* ----------------- Seccion Imágenes Exteriores ------------------ */
+.inicio__secExterior {
+    height: 50%;
+    width: 50%;
+    display: flex;
+    align-items: flex-end;
+}
+.inicio__img--secExterior {
+    width: 35rem;
+    height: 47rem;
+    border-radius: 2rem;
+    mix-blend-mode: lighten;
+}
+.inicio__img1--secExterior {
+    position: relative;
+    bottom: 6.25rem;
+    left: 1.85rem;
+}
+.inicio__img2--secExterior {
+    left: 12.5rem;
+    position: absolute;
+    bottom: 11.25rem;
+}
+/* ----------------------- Seccion Servicios ------------------------ */
+.inicio__secServicios {
+    height: 50%;
+    width: 50%;
+    display: flex; 
+    flex-direction: column;
+}
+.inicio__title--secServicios {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.inicio__h2--secServicios {
+    font-size: 3rem;
+    color: #ffffff;
+    font-weight: 800;
+}
+.inicio__whats {
+    height: 5%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.inicio__btn--whats {
+    width: 25rem;
+    border-radius: 1rem;
+    background-color: #68824b;
+    height: 3.2rem;
+    border: 0px;
+    font-size: 17px;
+    font-weight: 400;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.2s all;
+}
+.inicio__btn--whats:hover {
+    background-color: #577435;
+}
+.inicio__text--secServicios {
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.inicio__p--secServicios {
+    text-align: center;
+    width: 70%;
+    font-weight: 300;
+}
+
+.inicio__p--secServicios-s {
+    text-align: center;
+    width: 80%;
+    font-weight: 300;
+    margin-top: 10px;
+    position: relative;
+    list-style: none;
+    left: 10%;
+}
+
+.inicio__ayuda {
+    height: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.inicio__btn--ayuda {
+    width: 25rem;
+    border-radius: 1rem;
+    background-color: #1b1b1b;
+    border: 2px solid #84bbb1;
+    height: 3.2rem;
+    font-size: 17px;
+    font-weight: 400;
+    color: #ffffff;
+    cursor: pointer;
+    transition: 0.2s all;
+    opacity: 0.9;
+}
+.inicio__btn--ayuda:hover {
+    opacity: 1;
+}
+
+/* ************************* PAGINA RESERVAR ************************** */
+
+.main__reservar {
+    height: 70rem;
+    position: relative;
+    left: 3%;
+    width: 94%;
+    display: flex;
+}
+/* ------------------------- Seccion Reservar form */
+
+.reservar__secReserva {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.reservar__h2 {
+    font-size: 3rem;
+    color: #ffffff;
+    font-weight: 800;
+    margin-bottom: 1.3rem;
+}
+/* ----------------formulario para reservar ------------------ */
+.reservar__form {
+    width: 40rem;
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.reservar__entrada {
+    height: 20%;
+}
+.reservar__input {
+    width: 18rem;
+    height: 3rem;
+    position: relative;
+    left: 0.6rem;
+    border: 0;
+    border-radius: 1.5rem;
+    margin-top: 1.25rem;
+    text-align: center;
+    font-size: 16px;
+    opacity: 0.9;
+    padding: 10px;
+}
+.reservar__input:hover {
+    opacity: 1;
+}
+.reservar__salida {
+    height: 20%;
+}
+.reservar__personas {
+    height: 20%;
+}
+.reservar__tarifa {
+    display: flex;
+    align-items: center;
+    height: 20%;
+}
+.reservar__tarifa--uno {
+    display: flex;
+}
+.reservar__p {
+    margin-left: 0.6rem;
+    margin-right: 0.6rem;
+}
+.reservar__tarifa--dos {
+    display: flex;
+    justify-self: flex-end;
+}
+/* -------------------- botones reutilizacion -------------------- */
+.reservar__button {
+    margin-top: 1.85rem;
+    width: 22rem;
+    height: 3.25rem;
+    font-size: 15px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 1.5rem;
+    opacity: 0.9;
+    transition: 0.3s all;
+}
+.reservar__button:hover {
+    opacity: 1;
+}
+.reservar__button--reser {
+    background-color: #bf7b5e;
+    color: white;
+}
+.reservar__button--whats {
+    background-color: #1b1b1b;
+    color: #abcd90;
+}
+.reservar__button--complejo {
+    border: 2px solid #5eceb0;
+    color: white;
+    background-color: #1b1b1b;
+}
+.reservar__button--complejo:hover {
+    color: rgb(255, 255, 255);
+    background-color: #709088;
+}
+/* --------------link que lleva a preguntas frecuentes --------------*/
+.reservar__a--preguntas {
+    color: white;
+    text-underline-position: under;
+    opacity: 0.9;
+}
+.reservar__a--preguntas:hover {
+    opacity: 1;
+}
+/* ----------------- Seccion Portada con imagen ---------------------- */
+.reservar__secPortada {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}
+.reservar__img {
+    width: 40rem;
+    height: 55rem;
+    border-radius: 6.25rem 0px;
+    mix-blend-mode: lighten;
+}
+
+/* ************************* PAGINA AYUDA *************************** */
+
+.main__ayuda {
+    height: 100rem;
+    display: flex;
+    width: 94%;
+    position: relative;
+    left: 3%;
+    flex-wrap: wrap;
+}
+/* ----------------------Seccion Portada -------------------------- */
+.ayuda__sectionPortada {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+}
+.ayuda__img {
+    width: 54rem;
+    height: 36rem;
+    border-radius: 0px 6.25rem;
+    mix-blend-mode: lighten;
+    position: relative;
+    left: 1.85rem;
+}
+.ayuda__sectionContacto {
+    width: 50%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.ayuda__form {
+    display: flex;
+    width: 25rem;
+    height: 37.5rem;
+    justify-content: center;
+    flex-direction: column;
+}
+.ayuda__label {
+    margin-top: 1.25rem;
+}
+.ayuda__input {
+    margin-top: 0.3rem;
+    height: 3.25rem;
+    border: 0;
+    border-radius: 1.5rem;
+    padding: 15px;
+    font-size: 15px;
+    opacity: 0.9;
+}
+.ayuda__input:focus {
+    opacity: 1;
+}
+.ayuda__textarea {
+    height: 10rem;
+    margin-top: 0.3rem;
+    border-radius: 1.5rem;
+    resize: none;
+    border: none;
+    font-size: 15px;
+    padding: 15px;
+    opacity: 0.9;
+}
+.ayuda__textarea:focus {
+    opacity: 1;
+}
+.ayuda__button {
+    height: 3.25rem;
+    border: 0;
+    font-size: 15px;
+    border-radius: 1.5rem;
+    margin-top: 2.5rem;
+    cursor: pointer;
+    background-color: #da9d56;
+    font-weight: 600;
+    opacity: 0.9;
+    transition: 0.3s all;
+}
+.ayuda__button:hover {
+    opacity: 1;
+}
+/* ------------------ Seccion Preguntas frecuentes ------------- */
+.sectionPreguntas {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.ayuda__h2 {
+    font-size: 40px;
+    color: #ffffff;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+.ayuda__hr {
+    border: 1px solid #9e9e9e;
+    position: relative;
+    width: 64%;
+    left: 18%;
+}
+.ayuda__div {
+    height: 10%;
+    width: 60%;
+    position: relative;
+    left: 20%;
+    display: flex;
+    align-items: center;
+}
+.ayuda__p {
+    width: 100%;
+    position: relative;
+    text-align: center;
+}
+.ayuda__p-s {
+    color: #96bfb4;
+}
+
+/* *********************** PAGINA INICIAR SESION ************************/
+
+.main__iniciarse {
+    display: flex;
+    height: 45rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.iniciarse__h2 {
+    font-size: 48px;
+    color: #ffffff;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+.iniciarse__form {
+    display: flex;
+    flex-direction: column;
+}
+.iniciarse__label {
+    text-align: center;
+    margin-top: 1.25rem;
+    font-weight: 400;
+    font-size: 17px;
+}
+.iniciarse__input {
+    width: 22rem;
+    height: 3.25rem;
+    border: 0;
+    border-radius: 1.5rem;
+    margin-top: 1.25rem;
+    text-align: center;
+    opacity: 0.9;
+}
+.iniciarse__input:focus {
+    opacity: 1;
+}
+.iniciarse__a--form {
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+    margin-top: 0.8rem;
+}
+.iniciarse__a--form:hover {
+    text-decoration: underline;
+    text-underline-position: under;
+}
+.iniciarse__button--form {
+    width: 22rem;
+    height: 3.25rem;
+    border: 0;
+    font-size: 15px;
+    border-radius: 1.5rem;
+    margin-top: 2.5rem;
+    cursor: pointer;
+    background-color: #da9d56;
+    font-weight: 600;
+    opacity: 0.9;
+    transition: 0.3s all;
+}
+.iniciarse__button--form:hover {
+    opacity: 1;
+}
+.iniciarse__p {
+    margin-top: 1.25rem;
+    font-weight: 300;
+}
+.iniciarse__button {
+    margin-top: 30px;
+    width: 22rem;
+    height: 3.25rem;
+    font-size: 14px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 1.5rem;
+    opacity: 0.9;
+    color: white;
+    transition: 0.3s all;
+}
+.iniciarse__button:hover {
+    opacity: 1;
+}
+.iniciarse__button--registro {
+    background-color: #1b1b1b;
+    border: 2px solid #da9d56;
+}
+
+/* *********************** PAGINA REGISTRARSE ************************/
+
+.main__registrarse {
+    display: flex;
+    height: 50rem;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.registrarse__h2 {
+    font-size: 48px;
+    color: #ffffff;
+    font-weight: 800;
+    margin-bottom: 1rem;
+}
+.registrarse__form {
+    display: flex;
+    flex-direction: column;
+}
+.registrarse__label {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 400;
+    font-size: 17px;
+}
+.registrarse__input {
+    width: 22rem;
+    height: 3.25rem;
+    border: 0;
+    border-radius: 1.5rem;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16px;
+    opacity: 0.9;
+}
+.registrarse__input:focus {
+    opacity: 1;
+}
+.registrarse__button--form {
+    width: 22rem;
+    height: 3.25rem;
+    border: 0;
+    font-size: 15px;
+    border-radius: 1.5rem;
+    margin-top: 40px;
+    cursor: pointer;
+    background-color: #da9d56;
+    font-weight: 600;
+    opacity: 0.9;
+    transition: 0.3s all;
+}
+.registrarse__button--form:hover {
+    opacity: 1;
+}
+
+/* **************************** FOOTER ******************************** */
+
+.footer {
+    background: #171717;
+    height: 34.5rem;
+    width: 100%;
+}
+.footer__info {
+    height: 75%;
+    position: relative;
+    width: 94%;
+    left: 3%;
+    display: flex;
+    align-items: center;
+}
+/* ---------------- footer mapa parte 1 ----------------- */
+.footer__map {
+    width: 33.3%;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+.footer__iframe {
+    border-radius: 20px;
+    border: 0;
+    height: 17.5rem;
+    width: 24.3rem;
+}
+/* ---------------- footer logo parte 2 ----------------- */
+.footer__logo {
+    width: 33.3%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer__img--logo {
+    width: 25rem;
+}
+/* ---------------- footer redes parte 3 ----------------- */
+.footer__contacto {
+    width: 33.3%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: center;
+}
+.footer__redes {
+    display: flex;
+    align-items: center;
+}
+.footer__a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    margin-left: 6.25rem;
+    margin-bottom: 12px;
+    color: #ffffff;
+    opacity: 0.8;
+    text-decoration: none;
+    transition: 0.3s all;
+}
+.footer__a:hover {
+    opacity: 1;
+}
+.footer__img--redes {
+    width: 45px;
+}
+.footer__p--redes {
+    margin-top: 8px;
+}
+.footer__datos {
+    width: 24.0625rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.footer__h5 {
+    margin-top: 20px;
+    font-weight: 400;
+    font-size: 16px;
+}
+.footer__p--datos {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 300;
+}
+/* ------------------ footer hr divisor  ------------------- */
+.footer__hr {
+    border: 1px solid #b98060;
+    width: 94%;
+    position: relative;
+    left: 3%;
+}
+/* ------------------ footer copy parte 4 -------------------- */
+.footer__copy {
+    text-align: center;
+    position: relative;
+    top: 15px;
+    font-weight: 300;
+}
+.footer__p1--copy {
+    margin: 20px;
+}
+.footer__p2--copy {
+    margin: 20px;
+    color: #797979;
+}

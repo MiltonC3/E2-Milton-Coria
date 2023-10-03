@@ -1,0 +1,62 @@
+<main class="main__reservar">
+    <section class="reservar__secReserva">
+        <h2 class="reservar__h2">RESERVAR</h2>
+        <form class="reservar__form" action="">
+            <div class="reservar__entrada">
+                <label for="entradaR" class="reservar__label">Elige tu fecha de entrada:</label>
+                <input type="date" name="entradaR" id="entradaR" class="reservar__input" required/>
+            </div>
+            <div class="reservar__salida">
+                <label for="salidaR" class="reservar__label">Elige tu fecha de salida:</label>
+                <input type="date" name="salidaR" id="salidaR" class="reservar__input" required/>
+            </div>
+            <div class="reservar__personas">
+                <label for="personasR" class="reservar__label">Cantidad de personas:</label>
+                <input type="number" name="personasR" id="personasR" class="reservar__input" max="5" required/>
+            </div>
+            <div class="reservar__tarifa">
+                <div class="reservar__tarifa--uno">
+                    <p class="reservar__p">Tarifa/dia:</p>
+                    <p class="reservar__p">$11564</p>
+                </div>
+                <div class="reservar__tarifa--dos">
+                    <p class="reservar__p">Tarifa total:</p>
+                    <p class="reservar__p">$41564</p>
+                </div>
+            </div>
+            <a href="">
+                <button type="submit" class="reservar__button reservar__button--reser">Reservar</button>
+            </a>
+        </form>
+        <a href="">
+            <button class="reservar__button reservar__button--whats">Háblanos por Whatsapp</button>
+        </a>
+        <form class="reservar__form" action="">
+            <div class="reservar__entrada">
+                <label for="estadiaComplejo" class="reservar__label">Elige tu fecha de estadía:</label>
+                <input type="date" name="estadiaComplejo" id="estadiaComplejo" class="reservar__input" required/>
+            </div>
+            <div class="reservar__personas">
+                <label for="personasComplejo" class="reservar__label">Cantidad de personas:</label>
+                <input type="number" name="personasComplejo" id="personasComplejo" class="reservar__input" max="10" required/>
+            </div>
+            <div class="reservar__tarifa">
+                <div class="reservar__tarifa--uno">
+                    <p class="reservar__p">Tarifa/persona:</p>
+                    <p class="reservar__p">$1564</p>
+                </div>
+                <div class="reservar__tarifa--dos">
+                    <p class="reservar__p">Tarifa total:</p>
+                    <p class="reservar__p">$15564</p>
+                </div>
+            </div>
+            <a href="">
+                <button class="reservar__button reservar__button--complejo">Reservar complejo</button>
+            </a>
+        </form>
+        <a href="/ayuda" class="reservar__a--preguntas">Si tienes preguntas ve a la seccion preguntas frecuentes</a>
+    </section>
+    <section class="reservar__secPortada">
+        <img class="reservar__img" src="./assets/img/reservar-portada.jpg" alt=""/>
+    </section>
+</main>
