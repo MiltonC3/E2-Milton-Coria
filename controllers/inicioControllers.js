@@ -1,6 +1,9 @@
-const pageInicio = (req, res) => {
+// Aqui renderizo la pagina de ayuda al entrar en el enlace /
 
+const pageInicio = (req, res) => {
+    // Aqui estoy enviando el titulo de la pagina de inicio al handellbars para que asi en cada pagina tenga un distinto titulo
     const pageTitle = "Cabañas Bello Atardecer - Ojo de Agua, Sgo del Estero";
+    // Tambien estoy enviando la portada de inicio ya que asi solo el inicio tenga la portada como corresponde.
     const divPortada = `<div class="background">
     <img
       src="./assets/icon/logo.svg"
@@ -8,25 +11,9 @@ const pageInicio = (req, res) => {
       class="background__img"
     />
 </div>`;
-
-    const btnNav = `
-<li class="header__li">
-    <a href="/" class="header__a header__a--active">Inicio</a>
-</li>
-<li class="header__li">
-    <a href="/reservar" class="header__a">Reservar</a>
-</li>
-<li class="header__li">
-    <a href="/ayuda" class="header__a">Ayuda</a>
-</li>
-<li class="header__li li-signin">
-    <a href="/signin" class="header__a">Sign In</a>
-</li>
-<li class="header__li li-signup">
-    <a href="/signup" class="header__a">Sign Up</a>
-</li>`;
-
-    res.render("index", { title: pageTitle, portada: divPortada, btnNav: btnNav });
+    // Aqui renderizo la pagina inicio, adicionando como objeto los constantes para que de esa forma el layout lo reciba
+    res.render("index", { title: pageTitle, portada: divPortada });
 };
 
+// ruta GET - /
 module.exports = pageInicio;

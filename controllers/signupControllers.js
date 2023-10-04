@@ -1,36 +1,19 @@
-// const express = require("express");
-// const { validationResult } = require("express-validator");
-// const { login } = require("./signinControllers");
+// aqui requiero el mongo para interactuar con la base de datos
 const { client } = require("../database/conexion");
 
+// Aqui renderizo la pagina de ayuda al entrar en el enlace /signup
 const pageSignup = (req, res) => {
-
     const pageTitle = "Crea tu cuenta - Cabañas Bello Atardecer";
 
-    const btnNav = `
-<li class="header__li">
-    <a href="/" class="header__a">Inicio</a>
-</li>
-<li class="header__li">
-    <a href="/reservar" class="header__a">Reservar</a>
-</li>
-<li class="header__li">
-    <a href="/ayuda" class="header__a">Ayuda</a>
-</li>
-<li class="header__li li-signin">
-    <a href="/signin" class="header__a">Sign In</a>
-</li>
-<li class="header__li li-signup">
-    <a href="/signup" class="header__a header__a--active">Sign Up</a>
-</li>`;
-
-    res.render("signup", { title: pageTitle, btnNav: btnNav });
+    res.render("signup", { title: pageTitle });
 };
 
+// userSignup con metodo post tendrá la función de crer el usuario ingresado del formulario del /signup
 const userSignup = async (req, res) => {
-
+    // aqui con el destructuring recibo los datos del objeto del req.body el cual los datos tienen como propiedad el name de los inputs correspondiente
     const { nombre, nacimiento, correo, pass } = req.body;
 
+    // aqui creo el modelo del objeto que usaré para crear el usuario, en cada propiedad le doy como valor las constantes que destructure anteriormente 
     const userNew = {
         nombre: nombre,
         nacimiento: nacimiento,
@@ -38,75 +21,35 @@ const userSignup = async (req, res) => {
         pass: pass,
     };
 
+     // Busco la base de datos usando client el cual pedi al principio
     const db = client.db("clientes");
 
-    if (
-        (await db.collection("Cuentas").findOne({ correo: userNew.correo })) ===
-        null
-    ) {
+    // Busco si el usuario que intento crear ya se encuentra su correo en la base de datos
+    const correoExistente = await db.collection("Cuentas").findOne({ correo: userNew.correo })
+
+    // Para que aqui mediante una condicion analizo si su valor es null es decir el correo no fue usado por otro, entonces creo el usuario en la base de datos, usando insertOne y dandole como parametro al objeto modelo de usuario que tiene como valor los datos recibidos del form
+    // -Y si el correo ya fue usado dara un alert como error y renderizara la pagina /signup de vuelta para que vuelva a intentar a crear el usuario
+    if (correoExistente === null) {
         await db.collection("Cuentas").insertOne(userNew);
-        console.log("Datos insertado");
+        console.log("Usuario creado");
 
-        const success = `<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Creaste un nuevo usuario',
-        showConfirmButton: false,
-        timer: 1500
-    })
-</script>`;
-
-        const btnNav = `
-<li class="header__li">
-    <a href="/" class="header__a">Inicio</a>
-</li>
-<li class="header__li">
-    <a href="/reservar" class="header__a">Reservar</a>
-</li>
-<li class="header__li">
-    <a href="/ayuda" class="header__a">Ayuda</a>
-</li>
-<li class="header__li li-signin">
-    <a href="/signin" class="header__a header__a--active">Sign In</a>
-</li>
-<li class="header__li li-signup">
-    <a href="/signup" class="header__a">Sign Up</a>
-</li>`;
-
-        res.render("signin", { alert: success, btnNav: btnNav });
+        res.redirect("/signin");
     } else {
         const error = `
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Ingresa un correo válido!',
-        footer: '<a href="/signup">Registrate</a>'
+        text: 'Ya tienes una cuenta con el correo que ingresaste!',
+        footer: '<a href="/signin">Ingresa aqui</a>'
     })
 </script>`;
 
-        const btnNav = `
-<li class="header__li">
-    <a href="/" class="header__a">Inicio</a>
-</li>
-<li class="header__li">
-    <a href="/reservar" class="header__a">Reservar</a>
-</li>
-<li class="header__li">
-    <a href="/ayuda" class="header__a">Ayuda</a>
-</li>
-<li class="header__li li-signin">
-    <a href="/signin" class="header__a">Sign In</a>
-</li>
-<li class="header__li li-signup">
-    <a href="/signup" class="header__a header__a--active">Sign Up</a>
-</li>`;
-
-        res.render("signup", { alert: error, btnNav: btnNav });
+        res.render("signup", { alert: error });
     }
 };
 
-module.exports = { pageSignup, userSignup };
+module.exports = {
+    pageSignup, // ruta GET - /signup
+    userSignup, // ruta POST - /signup
+};

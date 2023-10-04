@@ -1,15 +1,15 @@
+// requires
 const express = require("express");
 const app = express();
 const path = require("path");
-const cors = require("cors");
 const hbs = require("hbs");
 require("dotenv").config();
-const fs = require("fs");
 // rutas
 const ayudaRoutes = require("./routes/ayudaRoutes");
 const inicioRoutes = require("./routes/inicioRoutes");
 const reservarRoutes = require("./routes/reservarRoutes");
 const signinRoutes = require("./routes/signinRoutes");
+const userRoutes = require("./routes/userRoutes");
 const signupRoutes = require("./routes/signupRoutes");
 
 const PORT = process.env.PORT;
@@ -29,6 +29,7 @@ app.use(
     inicioRoutes,
     reservarRoutes,
     signinRoutes,
+    userRoutes,
     signupRoutes
 );
 

@@ -39,7 +39,7 @@ body::-webkit-scrollbar-thumb {
 .header {
     height: 4.5rem;
     position: sticky;
-    background: #1b1b1b;
+    background: #1a1e21;
     box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
     top: 0px;
     width: 100%;
@@ -75,7 +75,7 @@ body::-webkit-scrollbar-thumb {
 }
 .header__a {
     color: #ffffff;
-    opacity: 0.8;
+    opacity: 0.7;
     text-decoration: none;
     font-size: 1.1rem;
     font-weight: 400;
@@ -88,12 +88,12 @@ body::-webkit-scrollbar-thumb {
     opacity: 1;
 }
 
-.li-signin {
+.li-btnUno {
     border: 1px solid rgb(189, 189, 189);
     border-radius: 0.5rem;
     padding: 5px 8px 5px 8px;
 }
-.li-signup {
+.li-btnDos {
     background: #b87b56;
     border-radius: 0.5rem;
     padding: 5px 8px 5px 8px;
@@ -286,11 +286,11 @@ body::-webkit-scrollbar-thumb {
     width: 25rem;
     border-radius: 1rem;
     background-color: #1b1b1b;
-    border: 2px solid #84bbb1;
+    border: 0;
     height: 3.2rem;
     font-size: 17px;
     font-weight: 400;
-    color: #ffffff;
+    color: #9fcac1;
     cursor: pointer;
     transition: 0.2s all;
     opacity: 0.9;
@@ -393,12 +393,12 @@ body::-webkit-scrollbar-thumb {
     color: white;
 }
 .reservar__button--whats {
-    background-color: #1b1b1b;
+    background-color: #1b1b1b00;
     color: #abcd90;
 }
 .reservar__button--complejo {
-    border: 2px solid #5eceb0;
-    color: white;
+    border: 1px solid #9fcac1;
+    color: #c9fff3;
     background-color: #1b1b1b;
 }
 .reservar__button--complejo:hover {
@@ -432,7 +432,7 @@ body::-webkit-scrollbar-thumb {
 /* ************************* PAGINA AYUDA *************************** */
 
 .main__ayuda {
-    height: 100rem;
+    height: 110rem;
     display: flex;
     width: 94%;
     position: relative;
@@ -442,7 +442,7 @@ body::-webkit-scrollbar-thumb {
 /* ----------------------Seccion Portada -------------------------- */
 .ayuda__sectionPortada {
     width: 50%;
-    height: 50%;
+    height: 45%;
     display: flex;
     align-items: center;
 }
@@ -456,7 +456,7 @@ body::-webkit-scrollbar-thumb {
 }
 .ayuda__sectionContacto {
     width: 50%;
-    height: 50%;
+    height: 45%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -471,6 +471,7 @@ body::-webkit-scrollbar-thumb {
 }
 .ayuda__label {
     margin-top: 1.25rem;
+    font-size: 15px;
 }
 .ayuda__input {
     margin-top: 0.3rem;
@@ -478,7 +479,7 @@ body::-webkit-scrollbar-thumb {
     border: 0;
     border-radius: 1.5rem;
     padding: 15px;
-    font-size: 15px;
+    font-size: 14px;
     opacity: 0.9;
 }
 .ayuda__input:focus {
@@ -548,7 +549,7 @@ body::-webkit-scrollbar-thumb {
     font-weight: 200;
 }
 .ayuda__p-s {
-    color: #96bfb4;
+    color: #9fcac1;
     font-weight: 300;
 }
 
@@ -644,7 +645,7 @@ body::-webkit-scrollbar-thumb {
 
 .main__registrarse {
     display: flex;
-    height: 60rem;
+    height: 50rem;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -654,7 +655,6 @@ body::-webkit-scrollbar-thumb {
     font-size: 48px;
     color: #ffffff;
     font-weight: 800;
-    margin-bottom: 1rem;
 }
 .registrarse__form {
     display: flex;
@@ -721,7 +721,7 @@ body::-webkit-scrollbar-thumb {
 /* **************************** FOOTER ******************************** */
 
 .footer {
-    background: #171717;
+    background: #1a1e21;
     height: 34.5rem;
     width: 100%;
 }
@@ -778,12 +778,12 @@ body::-webkit-scrollbar-thumb {
     margin-left: 6.25rem;
     margin-bottom: 12px;
     color: #ffffff;
-    opacity: 0.8;
     text-decoration: none;
     transition: 0.3s all;
 }
-.footer__a:hover {
-    opacity: 1;
+.footer__a:hover p {
+    text-decoration: underline;
+    text-underline-position: under;
 }
 .footer__img--redes {
     width: 45px;

@@ -9,7 +9,7 @@ const client = new MongoClient(MONGOATLAS);
 async function conexion() {
     try {
         await client.connect();
-        console.log(`Conexión establecida a la base de datos:${client.s.url}`);
+        console.log(`Conexión establecida a la base de datos de MongoDB Atlas`);
     } catch (error) {
         console.error("Error al conectar a MongoDB Atlas", error);
     }

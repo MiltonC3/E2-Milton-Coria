@@ -1,166 +1,78 @@
-// const express = require("express");
-// const { validationResult } = require("express-validator");
+// aqui requiero el mongo para interactuar con la base de datos
 const { client } = require("../database/conexion");
 
+// declaro la varible afuera para que de esa forma voy interactuando en distintas funciones con el login y asi pueda ir cambiando su valor dependiendo lo que necesite
 let login;
 
+// Aqui renderizo la pagina de ayuda al entrar en el enlace /signin
 const pageSignin = (req, res) => {
     const pageTitle = "Iniciar sesión - Cabañas Bello Atardecer";
 
-    const btnNav = `
-<li class="header__li">
-    <a href="/" class="header__a">Inicio</a>
-</li>
-<li class="header__li">
-    <a href="/reservar" class="header__a">Reservar</a>
-</li>
-<li class="header__li">
-    <a href="/ayuda" class="header__a">Ayuda</a>
-</li>
-<li class="header__li li-signin">
-    <a href="/signin" class="header__a header__a--active">Sign In</a>
-</li>
-<li class="header__li li-signup">
-    <a href="/signup" class="header__a">Sign Up</a>
-</li>`;
-
-    res.render("signin", { title: pageTitle, btnNav: btnNav });
+    res.render("signin", { title: pageTitle });
 };
 
+// userSignin con metodo post esta recibiendo lo que se ingresa del formulario del /signin
 const userSignin = async (req, res) => {
-    client.connect();
-
+    // aqui con el destructuring recibo los datos del objeto del req.body el cual los datos tienen como propiedad el name de los inputs correspondiente
     const { correo, pass } = req.body;
 
+    // aqui creo el modelo del objeto será el admin y con condiciones le dare el permiso de admin o cliente en el caso que no coincida con este objeto
     const admin = {
         correo: "miltoncoria03@gmail.com",
         pass: "boca123456",
     };
 
+    // aqui creo el modelo del objeto que usaré para el login, se que es mejor el usar mongoose y hacer los models de esa forma, pero no me dio el tiempo para realizarlo de esa forma ya que era un tema nuevo, para la tercera entrega seguro ya de seguro lo hare mejor
     const user = {
         correo: correo,
         pass: pass,
     };
 
+    // Busco la base de datos usando client el cual pedi al principio
     const db = client.db("clientes");
 
+    // Aqui cambio el valor de la variable que declare al prinicipio por el usuario encontrado en la base de datos, entonces si lo encuentra en la db se guardara en la variable login para despues con el nuevo valor realizar distintas cosas
+    // 1- Primero aqui busco la coleccion Cuentas
+    // 2- Busco en la base de datos lo que coincide con el model user el cual ingrese en el login
     login = await db
         .collection("Cuentas")
         .findOne({ correo: user.correo, pass: user.pass });
 
+    // La condicion tiene la funcion de:
+    // 1 - if - si no encuentra al usuario ingresado en signin dara un error al usuario y renderizara de vuelta la pagina signin para que el ususario vuelva ingresar su cuenta e intentar loguearse
+    // 2 - else - al encontrar el usuario redirecciona a la pagina del inicio y bueno login ya cambio de valor por el usuario encontrado en la base de datos
     if (login === null) {
         const error = `
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Ingresa el correo y contraseña correctamente!',
-        footer: '<a href="/signup">Registrate</a>'
+        text: 'Ingresa el correo y la contraseña correctamente!'
     })
 </script>`;
 
-        const btnNav = `
-<li class="header__li">
-    <a href="/" class="header__a">Inicio</a>
-</li>
-<li class="header__li">
-    <a href="/reservar" class="header__a">Reservar</a>
-</li>
-<li class="header__li">
-    <a href="/ayuda" class="header__a">Ayuda</a>
-</li>
-<li class="header__li li-signin">
-    <a href="/signin" class="header__a header__a--active">Sign In</a>
-</li>
-<li class="header__li li-signup">
-    <a href="/signup" class="header__a">Sign Up</a>
-</li>`;
-
-        res.render("signin", { alert: error, btnNav: btnNav });
+        res.render("signin", { alert: error });
     } else {
-        console.log("usuario encontrado");
+        res.redirect("/");
     }
-    // else if (
-    //         login.correo &&
-    //         login.pass === user.pass &&
-    //         login.correo !== admin.correo &&
-    //         login.pass !== admin.pass
-    //     ) {
-    //         const pageTitle = "Bienvenido Cliente - Cabañas Bello Atardecer";
-
-    //         const btnNav = `
-    // <li class="header__li">
-    //     <a href="/" class="header__a">Inicio</a>
-    // </li>
-    // <li class="header__li">
-    //     <a href="/reservar" class="header__a">Reservar</a>
-    // </li>
-    //    <li class="header__li">
-    //     <a href="/ayuda" class="header__a">Ayuda</a>
-    // </li>
-    // <li class="header__li li-signin">
-    //     <a href="/signin" class="header__a header__a--active">Sign In</a>
-    // </li>
-    // <li class="header__li li-signup">
-    //     <a href="/signup" class="header__a">Sign Up</a>
-    // </li>`;
-
-    //         const success = `<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    // <script>
-    //     Swal.fire({
-    //         position: 'top-end',
-    //         icon: 'success',
-    //         title: 'Iniciaste sesión con ${login.nombre}',
-    //         showConfirmButton: false,
-    //         timer: 1500
-    //     })
-    // </script>`;
-
-    //         res.render("client", { alert: success, btnNav: btnNav });
-    //     } else if (login.correo === admin.correo && login.pass === admin.pass) {
-    //         const pageTitle = "Bienvenido Admin - Cabañas Bello Atardecer";
-
-    //         const btnNav = `
-    // <li class="header__li">
-    //     <a href="/" class="header__a">Inicio</a>
-    // </li>
-    // <li class="header__li">
-    //     <a href="/reservar" class="header__a">Reservar</a>
-    // </li>
-    // <li class="header__li">
-    //     <a href="/ayuda" class="header__a">Ayuda</a>
-    // </li>
-    // <li class="header__li li-signin">
-    //     <a href="/signin" class="header__a header__a--active">Sign In</a>
-    // </li>
-    // <li class="header__li li-signup">
-    //     <a href="/signup" class="header__a">Sign Up</a>
-    // </li>`;
-
-    //         const success = `<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    // <script>
-    //     Swal.fire({
-    //            position: 'top-end',
-    //         icon: 'success',
-    //         title: 'Iniciaste sesión con ${login.nombre}: Administrador',
-    //         showConfirmButton: false,
-    //         timer: 1500
-    //     })
-    // </script>`;
-
-    //         res.render("admin", {
-    //             title: pageTitle,
-    //             btnNav: btnNav,
-    //             alert: success,
-    //         });
-    //     }
 };
 
+// userFront esta tanto en el servidor como en front end, desde aqui le respondo como json la variable login que contiene el usuario encontrado
 const userFront = async (req, res) => {
     if (login !== "" && login !== null) {
-        res.json(login);
+        res.json({ login: login });
     }
 };
 
-module.exports = { pageSignin, userSignin, userFront };
+// userOut tiene la funcion de que el la variable login se vacie y de esa forma el usuario encontrado se elimine y cumpliria la funcion de cerrar sesion,ya que el userFront no responderia nada al frontend y asi desde el front no se cumpla las condiciones para usar la interfaz de usuario
+const userOut = async (req, res) => {
+    login = undefined;
+    res.redirect("/");
+};
+
+module.exports = {
+    pageSignin, // ruta GET - /signin
+    userSignin, // ruta POST - /signin
+    userFront, // ruta GET - /userFront
+    userOut, // ruta GET - /signout
+};
