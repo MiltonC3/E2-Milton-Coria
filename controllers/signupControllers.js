@@ -13,7 +13,7 @@ const userSignup = async (req, res) => {
     // aqui con el destructuring recibo los datos del objeto del req.body el cual los datos tienen como propiedad el name de los inputs correspondiente
     const { nombre, nacimiento, correo, pass } = req.body;
 
-    // aqui creo el modelo del objeto que usaré para crear el usuario, en cada propiedad le doy como valor las constantes que destructure anteriormente 
+    // aqui creo el modelo del objeto que usaré para crear el usuario, en cada propiedad le doy como valor las constantes que destructure anteriormente
     const userNew = {
         nombre: nombre,
         nacimiento: nacimiento,
@@ -21,15 +21,27 @@ const userSignup = async (req, res) => {
         pass: pass,
     };
 
-     // Busco la base de datos usando client el cual pedi al principio
+    // Busco la base de datos usando client el cual pedi al principio
     const db = client.db("clientes");
 
-    // Busco si el usuario que intento crear ya se encuentra su correo en la base de datos
-    const correoExistente = await db.collection("Cuentas").findOne({ correo: userNew.correo })
+    // Busco si el usuario que intento crear ya se encuentra su nombre,correo,pass en la base de datos
+    const nombreExistente = await db
+        .collection("Cuentas")
+        .findOne({ nombre: userNew.nombre });
+    const correoExistente = await db
+        .collection("Cuentas")
+        .findOne({ correo: userNew.correo });
+    const passExistente = await db
+        .collection("Cuentas")
+        .findOne({ pass: userNew.pass });
 
     // Para que aqui mediante una condicion analizo si su valor es null es decir el correo no fue usado por otro, entonces creo el usuario en la base de datos, usando insertOne y dandole como parametro al objeto modelo de usuario que tiene como valor los datos recibidos del form
-    // -Y si el correo ya fue usado dara un alert como error y renderizara la pagina /signup de vuelta para que vuelva a intentar a crear el usuario
-    if (correoExistente === null) {
+    // -Y si el nombre,correo,pass ya fue usado dara un alert como error y renderizara la pagina /signup de vuelta para que vuelva a intentar a crear el usuario
+    if (
+        nombreExistente === null &&
+        correoExistente === null &&
+        passExistente === null
+    ) {
         await db.collection("Cuentas").insertOne(userNew);
         console.log("Usuario creado");
 
@@ -40,7 +52,7 @@ const userSignup = async (req, res) => {
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Ya tienes una cuenta con el correo que ingresaste!',
+        text: 'Ya tienes una cuenta con las datos ingresados!',
         footer: '<a href="/signin">Ingresa aqui</a>'
     })
 </script>`;
