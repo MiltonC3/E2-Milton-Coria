@@ -15,6 +15,9 @@ const pageSignin = (req, res) => {
 
 // userSignin con metodo post esta recibiendo lo que se ingresa del formulario del /signin
 const userSignin = async (req, res) => {
+    
+    const userAgent = req.headers["user-agent"];
+
     // aqui con el destructuring recibo los datos del objeto del req.body el cual los datos tienen como propiedad el name de los inputs correspondiente
     const { correo, pass } = req.body;
 
@@ -57,9 +60,15 @@ const userSignin = async (req, res) => {
 
         res.render("signin", { title: pageTitle, alert: error });
     } else {
+        login.userAgent = userAgent
         res.redirect("/");
     }
 };
+
+// const userAgent = async (req, res) => {
+//     const data = req.headers["user-agent"];
+//     console.log(data);
+// };
 
 // userFront esta tanto en el servidor como en front end, desde aqui le respondo como json la variable login que contiene el usuario encontrado
 const userFront = async (req, res) => {
@@ -94,7 +103,10 @@ const userPass = async (req, res) => {
 
     const db = client.db("clientes");
 
-    if (userPassNew.pass === confirmpass && userPassNew.correo !== admin.correo) {
+    if (
+        userPassNew.pass === confirmpass &&
+        userPassNew.correo !== admin.correo
+    ) {
         newPass = await db
             .collection("Cuentas")
             .updateOne(
@@ -139,4 +151,5 @@ module.exports = {
     userOut, // ruta GET - /signout
     pagePassRecover, // ruta GET - /recoverpass
     userPass, //ruta POST - /recoverpass
+    // userAgent, //ruta POST - /agentuser
 };

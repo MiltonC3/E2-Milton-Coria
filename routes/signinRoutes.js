@@ -8,7 +8,8 @@ const {
     userFront,
     userOut,
     pagePassRecover,
-    userPass
+    userPass,
+    // userAgent
 } = require("../controllers/signinControllers");
 
 router.get("/signin", pageSignin);
@@ -22,5 +23,7 @@ router.get("/signout", userOut);
 router.get('/recoverpass', pagePassRecover)
 
 router.post('/recoverpass', userPass)
+
+// router.post('/agentuser', userAgent)
 
 module.exports = router;

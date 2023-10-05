@@ -92,6 +92,8 @@ fetch("/userFront", {
     })
     .then((data) => {
         if (data.login !== undefined) {
+            var userAgentActual = navigator.userAgent;
+
             // Aqui mediante el modulo userFront que como res tenia login, entonces aqui lo recibo y lo guardo en el local storage para que persistan los datos
             localStorage.setItem("user", JSON.stringify(data));
 
@@ -111,7 +113,17 @@ fetch("/userFront", {
 
                 activeMenu("inicio", "reservar", "ayuda", "admin", "signout");
             }
-        } else {
+
+            if (storage.login.userAgent !== userAgentActual) {
+                fetch("/signout", {
+                    method: "GET",
+                });
+    
+                window.location.href = "/";
+            }
+        }
+
+        if(data.login === undefined) {
             // si no se encuentra ningun usuario en la data que recibo de la db, vacio el local storage, para que asi tambien cuando le de en signout borre el local storage y cumpla la funcion de cerrar sesion
             localStorage.clear();
         }
@@ -119,3 +131,24 @@ fetch("/userFront", {
     .catch((error) => {
         console.error("Error:", error);
     });
+
+// function userAgent() {
+//     var userAgent = navigator.userAgent;
+//     fetch("/agentuser", {
+//         method: "POST",
+//         // headers: {
+//         //     "Content-Type": "application/json",
+//         // },
+//         // body: JSON.stringify(userAgent),
+//     })
+//         .then((response) => {
+//             if (response.ok) {
+//                 return response.json(userAgent);
+//             } else {
+//                 throw new Error("Error al realizar la solicitud");
+//             }
+//         })
+//         .catch((error) => {
+//             console.error("Error:", error);
+//         });
+// }
