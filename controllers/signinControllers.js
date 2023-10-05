@@ -4,6 +4,8 @@ const { client } = require("../database/conexion");
 // declaro la varible afuera para que de esa forma voy interactuando en distintas funciones con el login y asi pueda ir cambiando su valor dependiendo lo que necesite
 let login;
 
+let newPass;
+
 // Aqui renderizo la pagina de ayuda al entrar en el enlace /signin
 const pageSignin = (req, res) => {
     const pageTitle = "Iniciar sesión - Cabañas Bello Atardecer";
@@ -19,7 +21,7 @@ const userSignin = async (req, res) => {
     // aqui creo el modelo del objeto será el admin y con condiciones le dare el permiso de admin o cliente en el caso que no coincida con este objeto
     const admin = {
         correo: "miltoncoria03@gmail.com",
-        pass: "boca123456",
+        pass: "12345678",
     };
 
     // aqui creo el modelo del objeto que usaré para el login, se que es mejor el usar mongoose y hacer los models de esa forma, pero no me dio el tiempo para realizarlo de esa forma ya que era un tema nuevo, para la tercera entrega seguro ya de seguro lo hare mejor
@@ -47,11 +49,13 @@ const userSignin = async (req, res) => {
     Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Ingresa el correo y la contraseña correctamente!'
+        text: 'Los datos que ingresaste no son válidos!'
     })
 </script>`;
 
-        res.render("signin", { alert: error });
+        const pageTitle = "Iniciar sesión - Cabañas Bello Atardecer";
+
+        res.render("signin", { title: pageTitle, alert: error });
     } else {
         res.redirect("/");
     }
@@ -67,7 +71,65 @@ const userFront = async (req, res) => {
 // userOut tiene la funcion de que el la variable login se vacie y de esa forma el usuario encontrado se elimine y cumpliria la funcion de cerrar sesion,ya que el userFront no responderia nada al frontend y asi desde el front no se cumpla las condiciones para usar la interfaz de usuario
 const userOut = async (req, res) => {
     login = undefined;
-    res.redirect("/");
+};
+
+const pagePassRecover = async (req, res) => {
+    const pageTitle = "Recupera tu contraseña - Cabañas Bello Atardecer";
+
+    res.render("pass", { title: pageTitle });
+};
+
+const userPass = async (req, res) => {
+    const { correo, pass, confirmpass } = req.body;
+
+    const admin = {
+        correo: "miltoncoria03@gmail.com",
+        pass: "12345678",
+    };
+
+    const userPassNew = {
+        correo: correo,
+        pass: pass,
+    };
+
+    const db = client.db("clientes");
+
+    if (userPassNew.pass === confirmpass && userPassNew.correo !== admin.correo) {
+        newPass = await db
+            .collection("Cuentas")
+            .updateOne(
+                { correo: userPassNew.correo },
+                { $set: { pass: userPassNew.pass } }
+            );
+    }
+
+    if (newPass === null || newPass === undefined) {
+        const error = `
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Los datos que ingresaste no son válidos!'
+    })
+</script>`;
+
+        const pageTitle = "Recupera tu contraseña - Cabañas Bello Atardecer";
+
+        res.render("pass", { title: pageTitle, alert: error });
+    } else {
+        const success = `
+<script>
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Tus contraseña fue modificada correctamente",
+    })
+</script>`;
+
+        const pageTitle = "Iniciar sesión - Cabañas Bello Atardecer";
+
+        res.render("signin", { title: pageTitle, alert: success });
+    }
 };
 
 module.exports = {
@@ -75,4 +137,6 @@ module.exports = {
     userSignin, // ruta POST - /signin
     userFront, // ruta GET - /userFront
     userOut, // ruta GET - /signout
+    pagePassRecover, // ruta GET - /recoverpass
+    userPass, //ruta POST - /recoverpass
 };

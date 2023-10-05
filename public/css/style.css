@@ -87,6 +87,19 @@ body::-webkit-scrollbar-thumb {
 .header__a--active {
     opacity: 1;
 }
+.header__a--btn {
+    color: #ffffff;
+    opacity: 0.7;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+    border: none;
+    transition: 0.3s all;
+    background-color: rgba(0, 0, 0, 0);
+}
+.header__a--btn:hover {
+    opacity: 1;
+}
 
 .li-btnUno {
     border: 1px solid rgb(189, 189, 189);
@@ -553,33 +566,40 @@ body::-webkit-scrollbar-thumb {
     font-weight: 300;
 }
 
-/* *********************** PAGINA INICIAR SESION ************************/
+/* *********************** PAGINA USERS (client - admin - pass) ************************/
 
-.main__iniciarse {
+.main__user {
     display: flex;
-    height: 45rem;
     width: 100%;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-.iniciarse__h2 {
+.main__signin{
+    height: 45rem;
+}
+.main__signup{
+    height: 50rem;
+}
+.main__pass{
+    height: 50rem;
+}
+.user__h2 {
     font-size: 48px;
     color: #ffffff;
     font-weight: 800;
-    margin-bottom: 1rem;
 }
-.iniciarse__form {
+.user__form {
     display: flex;
     flex-direction: column;
 }
-.iniciarse__label {
+.user__label {
     text-align: center;
     margin-top: 1.25rem;
     font-weight: 400;
     font-size: 17px;
 }
-.iniciarse__input {
+.user__input {
     width: 22rem;
     height: 3.25rem;
     border: 0;
@@ -588,112 +608,47 @@ body::-webkit-scrollbar-thumb {
     text-align: center;
     opacity: 0.9;
 }
-.iniciarse__input:focus {
+.user__input:focus {
     opacity: 1;
 }
-.iniciarse__a--form {
+.user__a--form {
     font-size: 14px;
     color: white;
     text-decoration: none;
     margin-top: 0.8rem;
 }
-.iniciarse__a--form:hover {
+.user__a--form:hover {
     text-decoration: underline;
     text-underline-position: under;
 }
-.iniciarse__button--form {
+.user__btn {
     width: 22rem;
     height: 3.25rem;
     border: 0;
     font-size: 15px;
     border-radius: 1.5rem;
-    margin-top: 2.5rem;
     cursor: pointer;
-    background-color: #da9d56;
     font-weight: 600;
     opacity: 0.9;
     transition: 0.3s all;
 }
-.iniciarse__button--form:hover {
+.user__btn:hover {
     opacity: 1;
 }
-.iniciarse__p {
-    margin-top: 1.25rem;
-    font-weight: 300;
+.user__btnUno {
+    margin-top: 50px;
+    background-color: #da9d56;
+    color: #1b1b1b;
 }
-.iniciarse__button {
-    margin-top: 30px;
-    width: 22rem;
-    height: 3.25rem;
-    font-size: 14px;
-    cursor: pointer;
-    border: 0;
-    border-radius: 1.5rem;
-    opacity: 0.9;
-    color: white;
-    transition: 0.3s all;
-}
-.iniciarse__button:hover {
-    opacity: 1;
-}
-.iniciarse__button--registro {
+.user__btnDos {
     background-color: #1b1b1b;
+    color: #f3f3f3;
     border: 2px solid #da9d56;
 }
-
-/* *********************** PAGINA REGISTRARSE ************************/
-
-.main__registrarse {
-    display: flex;
-    height: 50rem;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.registrarse__h2 {
-    font-size: 48px;
-    color: #ffffff;
-    font-weight: 800;
-}
-.registrarse__form {
-    display: flex;
-    flex-direction: column;
-}
-.registrarse__label {
-    text-align: center;
-    margin-top: 20px;
-    font-weight: 400;
-    font-size: 17px;
-}
-.registrarse__input {
-    width: 22rem;
-    height: 3.25rem;
-    border: 0;
-    border-radius: 1.5rem;
-    margin-top: 20px;
-    text-align: center;
-    font-size: 16px;
-    opacity: 0.9;
-}
-.registrarse__input:focus {
-    opacity: 1;
-}
-.registrarse__button--form {
-    width: 22rem;
-    height: 3.25rem;
-    border: 0;
-    font-size: 15px;
-    border-radius: 1.5rem;
-    margin-top: 40px;
-    cursor: pointer;
-    background-color: #da9d56;
-    font-weight: 600;
-    opacity: 0.9;
-    transition: 0.3s all;
-}
-.registrarse__button--form:hover {
-    opacity: 1;
+.user__p {
+    font-weight: 300;
+    margin-top: 15px;
+    margin-bottom: 20px;
 }
 
 /* *********************** PAGINA ADMIN ************************/

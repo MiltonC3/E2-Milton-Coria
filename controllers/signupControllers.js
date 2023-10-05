@@ -43,7 +43,6 @@ const userSignup = async (req, res) => {
         passExistente === null
     ) {
         await db.collection("Cuentas").insertOne(userNew);
-        console.log("Usuario creado");
 
         res.redirect("/signin");
     } else {

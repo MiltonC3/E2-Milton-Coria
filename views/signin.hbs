@@ -1,16 +1,16 @@
-<main class="main__iniciarse">
-    <h2 class="iniciarse__h2">Bienvenido!</h2>
-    <form action="/signin" method="post" class="iniciarse__form">
-        <label for="correo" class="iniciarse__label">Correo electrónico:</label>
-        <input type="email" name="correo" id="correo" class="iniciarse__input" required/>
-        <label for="pass" class="iniciarse__label">Contraseña:</label>
-        <input type="password" name="pass" id="pass" class="iniciarse__input" required minlength="8" maxlength="16"/>
-        <a href="" class="iniciarse__a--form">¿Olvidaste tu contraseña?</a>
-        <button type="submit" class="iniciarse__button--form">Iniciar Sesión</button>
+<main class="main__user main__signin">
+    <h2 class="user__h2">Bienvenido!</h2>
+    <form action="/signin" method="post" class="user__form">
+        <label for="correo" class="user__label">Correo electrónico:</label>
+        <input type="email" name="correo" id="correo" class="user__input" required/>
+        <label for="pass" class="user__label">Contraseña:</label>
+        <input type="password" name="pass" id="pass" class="user__input" required minlength="8" maxlength="16"/>
+        <a href="/recoverpass" class="user__a--form">¿Olvidaste tu contraseña?</a>
+        <button type="submit" class="user__btn user__btnUno">Iniciar sesión</button>
     </form>
-    <p class="iniciarse__p">o</p>
+    <p class="user__p">o</p>
     <a href="/signup">
-        <button class="iniciarse__button iniciarse__button--registro">Registrarse</button>
+        <button class="user__btn user__btnDos">Crear cuenta</button>
     </a>
 </main>
 

@@ -16,7 +16,7 @@ function menu(name, user) {
     <a id="${user}" href="/${user}" class="header__a">${name}</a>
 </li>
 <li class="header__li li-btnDos">
-    <a href="/signout" id="signout" class="header__a">Sign Out</a>
+    <button id="signout" onclick="alertSignOut()" class="header__a--btn">Cerrar sesión</button>
 </li>`;
 }
 
@@ -43,6 +43,37 @@ function activeMenu(nav1, nav2, nav3, nav4, nav5) {
     rutaRelativa === `/${nav5}`
         ? navCinco.classList.add("header__a--active")
         : "";
+}
+
+function alertSignOut() {
+    Swal.fire({
+        title: "Estás cerrando sesión?",
+        text: "",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Confirmar",
+        cancelButtonText: "Cancelar",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch("/signout", {
+                method: "GET",
+            });
+
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Tus datos fueron guardados correctamente",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+
+            setTimeout(function () {
+                window.location.href = "/";
+            }, 1700);
+        }
+    });
 }
 
 // aqui llamo la funcion para que en cada pagina se realize lo pedido de distinguir en el nav en la ruta que me encuentro

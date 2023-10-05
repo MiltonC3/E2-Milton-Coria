@@ -1,0 +1,16 @@
+<main class="main__user main__pass">
+    <h2 class="user__h2">Recupera tu contraseña!</h2>
+    <form action="/recoverpass" method="post" class="user__form">
+        <label for="correo" class="user__label">Correo electrónico:</label>
+        <input type="email" name="correo" id="correo" class="user__input" required/>
+        <label for="pass" class="user__label">Nueva contraseña:</label>
+        <input type="password" name="pass" id="pass" class="user__input" required minlength="8" maxlength="16"/>
+        <label for="confirmpass" class="user__label">Confirmar contraseña:</label>
+        <input type="password" name="confirmpass" id="confirmpass" class="user__input" required minlength="8" maxlength="16"/>
+        <button type="submit" class="user__btn user__btnUno">Cambiar contraseña</button>
+    </form>
+    <p class="user__p">o</p>
+    <a href="/signup">
+        <button class="user__btn user__btnDos">Crear cuenta</button>
+    </a>
+</main>
