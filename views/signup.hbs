@@ -1,14 +1,37 @@
 <main class="main__user main__signup">
     <h2 class="user__h2">Crea tu cuenta!</h2>
-    <form action="/signup" method="post" class="user__form">
-        <label for="nombre" class="user__label">Nombre y Apellido:</label>
-        <input type="text" name="nombre" id="nombre" class="user__input" required/>
-        <label for="nacimiento" class="user__label">Fecha de nacimiento:</label>
-        <input type="date" name="nacimiento" id="nacimiento" class="user__input" required/>
-        <label for="correo" class="user__label">Correo electrónico:</label>
-        <input type="email" name="correo" id="correo" class="user__input" required/>
-        <label for="pass" class="user__label">Contraseña:</label>
-        <input type="password" name="pass" id="pass" class="user__input" required minlength="8" maxlength="16"/>
+    <form action="/signup" method="post" class="user__form form--signup">
+        <div class="user__div">
+            <div class="user__div--inputs">
+                <label for="nombre" class="user__label">Nombre y Apellido:</label>
+                <input type="text" name="nombre" id="nombre" class="user__input" required minlength="10"/>
+            </div>
+            <div class="user__div--inputs">
+                <label for="nacimiento" class="user__label">Fecha de nacimiento:</label>
+                <input type="date" name="nacimiento" id="nacimiento" class="user__input" required/>
+            </div>
+        </div>
+        <div class="user__div">
+            <div class="user__div--inputs">
+                <label for="telefono" class="user__label">Nro de Teléfono:</label>
+                <input type="tel" name="telefono" id="telefono" class="user__input" required maxlength="10"/>
+            </div>
+            <div class="user__div--inputs">
+                <label for="ubicacion" class="user__label">Ubicación:</label>
+                <input type="tel" name="ubicacion" id="ubicacion" class="user__input" required/>
+            </div>
+        </div>
+        <div class="user__div">
+            <div class="user__div--inputs">
+                <label for="correo" class="user__label">Correo electrónico:</label>
+                <input type="email" name="correo" id="correo" class="user__input" required/>
+            </div>
+            <div class="user__div--inputs">
+                <label for="pass" class="user__label">Contraseña:</label>
+                <input type="password" name="pass" id="pass" class="user__input" required minlength="8" maxlength="16"/>
+            </div>
+        </div>
+        
         <button type="submit" class="user__btn user__btnUno">Crear cuenta</button>
     </form>
 </main>

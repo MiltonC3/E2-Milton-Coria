@@ -4,7 +4,15 @@ const { client } = require("../database/conexion");
 // declaro la varible afuera para que de esa forma voy interactuando en distintas funciones con el login y asi pueda ir cambiando su valor dependiendo lo que necesite
 let login;
 
+let listaClientes;
+
 let newPass;
+
+// aqui creo el modelo del objeto será el admin y con condiciones le dare el permiso de admin o cliente en el caso que no coincida con este objeto
+let admin = {
+    correo: "miltoncoria03@gmail.com",
+    pass: "12345678",
+};
 
 // Aqui renderizo la pagina de ayuda al entrar en el enlace /signin
 const pageSignin = (req, res) => {
@@ -15,17 +23,8 @@ const pageSignin = (req, res) => {
 
 // userSignin con metodo post esta recibiendo lo que se ingresa del formulario del /signin
 const userSignin = async (req, res) => {
-    
-    const userAgent = req.headers["user-agent"];
-
     // aqui con el destructuring recibo los datos del objeto del req.body el cual los datos tienen como propiedad el name de los inputs correspondiente
     const { correo, pass } = req.body;
-
-    // aqui creo el modelo del objeto será el admin y con condiciones le dare el permiso de admin o cliente en el caso que no coincida con este objeto
-    const admin = {
-        correo: "miltoncoria03@gmail.com",
-        pass: "12345678",
-    };
 
     // aqui creo el modelo del objeto que usaré para el login, se que es mejor el usar mongoose y hacer los models de esa forma, pero no me dio el tiempo para realizarlo de esa forma ya que era un tema nuevo, para la tercera entrega seguro ya de seguro lo hare mejor
     const user = {
@@ -34,14 +33,23 @@ const userSignin = async (req, res) => {
     };
 
     // Busco la base de datos usando client el cual pedi al principio
-    const db = client.db("clientes");
+    const db =
+        user.correo === admin.correo
+            ? client.db("administradores")
+            : client.db("clientes");
 
     // Aqui cambio el valor de la variable que declare al prinicipio por el usuario encontrado en la base de datos, entonces si lo encuentra en la db se guardara en la variable login para despues con el nuevo valor realizar distintas cosas
     // 1- Primero aqui busco la coleccion Cuentas
     // 2- Busco en la base de datos lo que coincide con el model user el cual ingrese en el login
     login = await db
-        .collection("Cuentas")
+        .collection("cuentas")
         .findOne({ correo: user.correo, pass: user.pass });
+
+    listaClientes = login.correo === admin.correo ? await client.db("clientes").collection("cuentas").find({}).toArray(): undefined;
+
+    //* await client.db("clientes").collection("cuentas").find({}).toArray();
+    //* await client.db("clientes").collection("reservas").find({}).toArray();
+    //* await client.db("clientes").collection("consultas").find({}).toArray();
 
     // La condicion tiene la funcion de:
     // 1 - if - si no encuentra al usuario ingresado en signin dara un error al usuario y renderizara de vuelta la pagina signin para que el ususario vuelva ingresar su cuenta e intentar loguearse
@@ -60,20 +68,14 @@ const userSignin = async (req, res) => {
 
         res.render("signin", { title: pageTitle, alert: error });
     } else {
-        login.userAgent = userAgent
         res.redirect("/");
     }
 };
 
-// const userAgent = async (req, res) => {
-//     const data = req.headers["user-agent"];
-//     console.log(data);
-// };
-
 // userFront esta tanto en el servidor como en front end, desde aqui le respondo como json la variable login que contiene el usuario encontrado
 const userFront = async (req, res) => {
     if (login !== "" && login !== null) {
-        res.json({ login: login });
+        res.json({ login: login, listaClientes: listaClientes});
     }
 };
 
@@ -82,39 +84,42 @@ const userOut = async (req, res) => {
     login = undefined;
 };
 
+// Aqui renderizo la pagina de recuperar contraseña al entrar en el enlace /recoverpass
 const pagePassRecover = async (req, res) => {
     const pageTitle = "Recupera tu contraseña - Cabañas Bello Atardecer";
 
     res.render("pass", { title: pageTitle });
 };
 
+// La función  userPass  es una función asíncrona que se encarga de actualizar la contraseña de un usuario en la base de datos
 const userPass = async (req, res) => {
     const { correo, pass, confirmpass } = req.body;
-
-    const admin = {
-        correo: "miltoncoria03@gmail.com",
-        pass: "12345678",
-    };
 
     const userPassNew = {
         correo: correo,
         pass: pass,
     };
 
-    const db = client.db("clientes");
+    // Luego, se determina la base de datos en la que se realizará la actualización de la contraseña..
+    const db =
+        userPassNew.correo === admin.correo
+            ? client.db("administradores")
+            : client.db("clientes");
 
+    // Después, se verifica si la contraseña y la confirmación de contraseña son iguales. Si lo son, se realiza la actualización de la contraseña en la colección "cuentas" de la base de datos correspondiente.
     if (
         userPassNew.pass === confirmpass &&
         userPassNew.correo !== admin.correo
     ) {
         newPass = await db
-            .collection("Cuentas")
+            .collection("cuentas")
             .updateOne(
                 { correo: userPassNew.correo },
                 { $set: { pass: userPassNew.pass } }
             );
     }
 
+    // Si la actualización de la contraseña falla, se muestra un mensaje de error utilizando la librería  Swal.fire  y se renderiza la pagina recoverpass, en el caso que se modifique la cuenta del admin y no coincide con el perfil predifinado se modificara pero ya no sera admin, y si es exitosa muestra un mensaje y renderiza a la pagina de signin.
     if (newPass === null || newPass === undefined) {
         const error = `
 <script>
@@ -134,7 +139,7 @@ const userPass = async (req, res) => {
     Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Tus contraseña fue modificada correctamente",
+        title: "Tu contraseña fue modificada correctamente",
     })
 </script>`;
 
@@ -151,5 +156,4 @@ module.exports = {
     userOut, // ruta GET - /signout
     pagePassRecover, // ruta GET - /recoverpass
     userPass, //ruta POST - /recoverpass
-    // userAgent, //ruta POST - /agentuser
 };

@@ -1,6 +1,13 @@
 // aqui requiero el mongo para interactuar con la base de datos
 const { client } = require("../database/conexion");
 
+const { differenceInYears } = require('date-fns');
+
+let admin = {
+    correo: "miltoncoria03@gmail.com",
+    pass: "12345678",
+};
+
 // Aqui renderizo la pagina de ayuda al entrar en el enlace /signup
 const pageSignup = (req, res) => {
     const pageTitle = "Crea tu cuenta - Cabañas Bello Atardecer";
@@ -11,38 +18,41 @@ const pageSignup = (req, res) => {
 // userSignup con metodo post tendrá la función de crer el usuario ingresado del formulario del /signup
 const userSignup = async (req, res) => {
     // aqui con el destructuring recibo los datos del objeto del req.body el cual los datos tienen como propiedad el name de los inputs correspondiente
-    const { nombre, nacimiento, correo, pass } = req.body;
+    const { nombre, nacimiento, telefono, ubicacion, correo, pass } = req.body;
+
+    const edad = differenceInYears((new Date()), (new Date(nacimiento)));
 
     // aqui creo el modelo del objeto que usaré para crear el usuario, en cada propiedad le doy como valor las constantes que destructure anteriormente
     const userNew = {
         nombre: nombre,
         nacimiento: nacimiento,
+        edad: edad,
+        telefono: telefono,
+        ubicacion: ubicacion,
         correo: correo,
         pass: pass,
     };
 
     // Busco la base de datos usando client el cual pedi al principio
-    const db = client.db("clientes");
+    const db =
+        userNew.correo === admin.correo
+            ? client.db("administradores")
+            : client.db("clientes");
 
-    // Busco si el usuario que intento crear ya se encuentra su nombre,correo,pass en la base de datos
-    const nombreExistente = await db
-        .collection("Cuentas")
-        .findOne({ nombre: userNew.nombre });
+    // Busco si el usuario que intento crear ya se encuentra en la base de datos
     const correoExistente = await db
-        .collection("Cuentas")
+        .collection("cuentas")
         .findOne({ correo: userNew.correo });
     const passExistente = await db
-        .collection("Cuentas")
+        .collection("cuentas")
         .findOne({ pass: userNew.pass });
 
-    // Para que aqui mediante una condicion analizo si su valor es null es decir el correo no fue usado por otro, entonces creo el usuario en la base de datos, usando insertOne y dandole como parametro al objeto modelo de usuario que tiene como valor los datos recibidos del form
-    // -Y si el nombre,correo,pass ya fue usado dara un alert como error y renderizara la pagina /signup de vuelta para que vuelva a intentar a crear el usuario
+    // El código anterior verifica si ya existe una cuenta con los datos ingresados por el usuario. Si no existe una cuenta, se inserta en la base de datos y se redirige al usuario a la página de inicio de sesión. Si ya existe una cuenta con los mismos datos, se muestra un mensaje de error utilizando la biblioteca SweetAlert y se vuelve a cargar la página de registro con el mensaje de error.
     if (
-        nombreExistente === null &&
         correoExistente === null &&
         passExistente === null
     ) {
-        await db.collection("Cuentas").insertOne(userNew);
+        await db.collection("cuentas").insertOne(userNew);
 
         res.redirect("/signin");
     } else {
