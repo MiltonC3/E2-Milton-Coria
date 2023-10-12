@@ -166,7 +166,87 @@ if (window.location.pathname === "/adminclientes") {
                             });
 
                             setTimeout(function () {
-                                // !da error porque esta tomando del local storage y no se actualiza hasta que se cierra la sesion
+                                const datosSignin = JSON.parse(
+                                    localStorage.getItem("user")
+                                );
+
+                                const correo = datosSignin.login.correo;
+
+                                const pass = datosSignin.login.pass;
+
+                                fetch("/signout", {
+                                    method: "GET",
+                                });
+
+                                fetch("/signin", {
+                                    method: "POST",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                    },
+                                    body: JSON.stringify({
+                                        correo: correo,
+                                        pass: pass,
+                                    }),
+                                });
+
+                                fetch("/userFront", {
+                                    method: "GET",
+                                })
+                                    .then((response) => response.json())
+                                    .then((data) => {
+                                        if (data.login !== undefined) {
+                                            localStorage.setItem(
+                                                "user",
+                                                JSON.stringify(data)
+                                            );
+
+                                            const storage = JSON.parse(
+                                                localStorage.getItem("user")
+                                            );
+
+                                            if (
+                                                storage.login.correo !== "" &&
+                                                storage.login.correo !==
+                                                    "miltoncoria03@gmail.com"
+                                            ) {
+                                                menu(
+                                                    storage.login.nombre,
+                                                    "client"
+                                                );
+
+                                                activeMenu(
+                                                    "inicio",
+                                                    "reservar",
+                                                    "ayuda",
+                                                    "client",
+                                                    "signout"
+                                                );
+                                            } else if (
+                                                storage.login.correo ===
+                                                "miltoncoria03@gmail.com"
+                                            ) {
+                                                menu(
+                                                    storage.login.nombre,
+                                                    "admin"
+                                                );
+
+                                                activeMenu(
+                                                    "inicio",
+                                                    "reservar",
+                                                    "ayuda",
+                                                    "admin",
+                                                    "signout"
+                                                );
+                                            }
+                                        } else {
+                                            localStorage.clear();
+                                        }
+                                    })
+                                    .catch((error) => {
+                                        console.error("Error:", error);
+                                    });
+
+                                location.reload();
                             }, 1700);
                         }
                     });

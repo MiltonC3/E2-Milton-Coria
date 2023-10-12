@@ -52,13 +52,7 @@ activeMenu("inicio", "reservar", "ayuda", "signin", "signup");
 fetch("/userFront", {
     method: "GET",
 })
-    .then((response) => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error("Error al realizar la solicitud");
-        }
-    })
+    .then((response) => response.json())
     .then((data) => {
         if (data.login !== undefined) {
             // Aqui mediante el modulo userFront que como res tenia login, entonces aqui lo recibo y lo guardo en el local storage para que persistan los datos
