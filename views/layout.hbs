@@ -27,7 +27,9 @@
 
         {{{body}}}
 
-        {{> footer}}
+        {{#if showFooter}}
+          {{> footer}}
+        {{/if}}
     </body>
     
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -39,7 +41,8 @@
 
     <script src="./js/index.js"></script>
     <script src="./js/user.js"></script>
-    <script src="./js/calendario.js"></script>
+    <script src="./js/calendar.js"></script>
+    <script src="./js/functionsClient.js"></script>
     <script src="./js/client.js"></script>
     <script src="./js/admin.js"></script>
 

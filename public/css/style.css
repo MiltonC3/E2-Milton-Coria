@@ -669,6 +669,22 @@ body::-webkit-scrollbar-thumb {
     width: 10rem;
     text-align: center;
 }
+.user__card {
+    border: 0px !important;
+}
+.user__datos--input {
+    width: 100%;
+    height: 3.25rem;
+    border: 0;
+    border-radius: 1.5rem;
+    background-color: #16181b;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    color: rgb(244, 244, 244);
+}
+.user__datos--input:focus {
+    outline: #9fcac1 1px solid;
+}
 
 /* *********************** PAGINA ADMIN ************************/
 
@@ -903,7 +919,7 @@ body::-webkit-scrollbar-thumb {
 }
 /*  Events display */
 .events-container {
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 100%;
     width: 50%;
     float: right;

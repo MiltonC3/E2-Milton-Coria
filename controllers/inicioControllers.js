@@ -12,7 +12,11 @@ const pageInicio = (req, res) => {
     />
 </div>`;
     // Aqui renderizo la pagina inicio, adicionando como objeto los constantes para que de esa forma el layout lo reciba
-    res.render("index", { title: pageTitle, portada: divPortada });
+    res.render("index", {
+        title: pageTitle,
+        portada: divPortada,
+        showFooter: true,
+    });
 };
 
 // ruta GET - /

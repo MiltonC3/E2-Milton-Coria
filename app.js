@@ -9,7 +9,8 @@ const ayudaRoutes = require("./routes/ayudaRoutes");
 const inicioRoutes = require("./routes/inicioRoutes");
 const reservarRoutes = require("./routes/reservarRoutes");
 const signinRoutes = require("./routes/signinRoutes");
-const userRoutes = require("./routes/userRoutes");
+const adminRoutes = require("./routes/adminRoutes");
+const clientRoutes = require("./routes/clientRoutes");
 const signupRoutes = require("./routes/signupRoutes");
 
 const PORT = process.env.PORT;
@@ -29,7 +30,8 @@ app.use(
     inicioRoutes,
     reservarRoutes,
     signinRoutes,
-    userRoutes,
+    adminRoutes,
+    clientRoutes,
     signupRoutes
 );
 

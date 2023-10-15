@@ -4,30 +4,27 @@ if (window.location.pathname === "/client") {
     }).then((data) => {
         const sectionClient = document.getElementById("section-client");
 
-        const datos = JSON.parse(localStorage.getItem("user"));
+        const datos = localStorage.getItem("userActualizado") === null ? JSON.parse(localStorage.getItem("user")) : JSON.parse(localStorage.getItem("userActualizado"));
 
         sectionClient.innerHTML = `
 <section>
     <div class="row d-flex justify-content-center m-4 mt-5">
         <div class="col-md-4 mb-2 mb-sm-0 text-center">
-            <div class="card text-bg-dark">
+            <div class="card user__card text-bg-dark">
                 <div class="card-body">
                     <h5 class="card-title">Nombre y Apellido</h5>
-                    <p class="card-text">${datos.login.nombre}</p>
-                    <button type="button" class="btn btn-warning client__btn m-1">Editar <i class="bi bi-pencil"></i></button>
-                    <button type="button" class="btn btn-outline-danger m-1">Eliminar cuenta <i class="bi bi-pencil"></i></button>
+                    <input type="text" name="nombre" value="${datos.login.nombre}" id="nombre-client" class="user__datos--input" required minlength="10"/>
+                    <button type="button" onclick="guardarNombreClient()" class="btn btn-warning m-1">Guardar <i class="bi bi-pencil"></i></button>
+                    <button type="button" onclick="" class="btn btn-outline-danger m-1">Eliminar cuenta <i class="bi bi-pencil"></i></button>
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-2 mb-sm-0 text-center">
-            <div class="card text-bg-dark">
+            <div class="card user__card text-bg-dark">
                 <div class="card-body">
                     <h5 class="card-title">Ubicación</h5>
-                    <p class="card-text">${datos.login.ubicacion}</p>
-                    <button
-                        type="button"
-                        class="btn btn-warning client__btn m-1"
-                    >Editar <i class="bi bi-pencil"></i></button>
+                    <input type="text" name="ubicacion" value="${datos.login.ubicacion}" id="ubicacion-client" class="user__datos--input" required/>
+                    <button type="button" onclick="" class="btn btn-warning m-1">Guardar <i class="bi bi-pencil"></i></button>
                 </div>
             </div>
         </div>
@@ -35,27 +32,21 @@ if (window.location.pathname === "/client") {
     <hr class="container"/>
     <div class="row d-flex justify-content-center m-4">
         <div class="col-md-4 mb-2 mb-sm-0 text-center">
-            <div class="card text-bg-dark">
+            <div class="card user__card text-bg-dark">
                 <div class="card-body">
                     <h5 class="card-title">Nro de Teléfono</h5>
-                    <p class="card-text">${datos.login.telefono}</p>
-                    <button type="button" class="btn btn-warning client__btn m-1">Editar <i class="bi bi-pencil"></i></button>
+                    <input type="tel" name="telefono" value="${datos.login.telefono}" id="telefono-client" class="user__datos--input" required minlength="9" maxlength="12"/>
+                    <button type="button" onclick="" class="btn btn-warning m-1">Guardar <i class="bi bi-pencil"></i></button>
                 </div>
             </div>
         </div>
         <div class="col-md-4 mb-2 mb-sm-0 text-center">
-            <div class="card text-bg-dark">
+            <div class="card user__card text-bg-dark">
                 <div class="card-body">
-                    <h5 class="card-title">Correo</h5>
-                    <p class="card-text">${datos.login.correo}</p>
-                    <button
-                        type="button"
-                        class="btn btn-warning client__btn m-1"
-                    >Editar correo <i class="bi bi-pencil"></i></button>
-                    <button
-                        type="button"
-                        class="btn btn-outline-info client__btn m-1"
-                    >Cambiar contraseña <i class="bi bi-pencil"></i></button>
+                    <h5 class="card-title">Correo electrónico</h5>
+                    <input type="email" name="correo" value="${datos.login.correo}" id="correo-client" class="user__datos--input" required/>
+                    <button type="button" onclick="" class="btn btn-warning m-1">Guardar <i class="bi bi-pencil"></i></button>
+                    <button type="button" onclick="" class="btn btn-outline-info client__btn m-1">Cambiar contraseña <i class="bi bi-pencil"></i></button>
                 </div>
             </div>
         </div>

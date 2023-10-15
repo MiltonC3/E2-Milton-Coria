@@ -3,7 +3,7 @@
 const pageReservar = (req, res) => {
     const pageTitle = "Reservar - Cabañas Bello Atardecer";
 
-    res.render("reservar", { title: pageTitle });
+    res.render("reservar", { title: pageTitle, showFooter: true });
 };
 
 // ruta GET - /reservar

@@ -45,7 +45,7 @@ const userSignin = async (req, res) => {
         .collection("cuentas")
         .findOne({ correo: user.correo, pass: user.pass });
 
-    listaClientes = login.correo === admin.correo ? await client.db("clientes").collection("cuentas").find({}).toArray(): undefined;
+    listaClientes = user.correo === admin.correo ? await client.db("clientes").collection("cuentas").find({}).toArray(): undefined;
 
     //* await client.db("clientes").collection("cuentas").find({}).toArray();
     //* await client.db("clientes").collection("reservas").find({}).toArray();

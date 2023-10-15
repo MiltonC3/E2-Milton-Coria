@@ -56,10 +56,15 @@ fetch("/userFront", {
     .then((data) => {
         if (data.login !== undefined) {
             // Aqui mediante el modulo userFront que como res tenia login, entonces aqui lo recibo y lo guardo en el local storage para que persistan los datos
-            localStorage.setItem("user", JSON.stringify(data));
+            if (localStorage.getItem("userActualizado") === null) {
+                localStorage.setItem("user", JSON.stringify(data));
+            }
 
             // Al local storage lo guardo en una constante y asi condicionar en ella
-            const storage = JSON.parse(localStorage.getItem("user"));
+            const storage =
+                localStorage.getItem("userActualizado") === null
+                    ? JSON.parse(localStorage.getItem("user"))
+                    : JSON.parse(localStorage.getItem("userActualizado"));
 
             // Analiza si el usuario ingresado es un cliente cambiara el menu y el enlace que llevara a la pagina cliente, en el caso que sea admin llevara a la pagina amdin desde el cliente
             if (

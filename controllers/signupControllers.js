@@ -1,8 +1,6 @@
 // aqui requiero el mongo para interactuar con la base de datos
 const { client } = require("../database/conexion");
 
-const { differenceInYears } = require('date-fns');
-
 let admin = {
     correo: "miltoncoria03@gmail.com",
     pass: "12345678",
@@ -20,13 +18,10 @@ const userSignup = async (req, res) => {
     // aqui con el destructuring recibo los datos del objeto del req.body el cual los datos tienen como propiedad el name de los inputs correspondiente
     const { nombre, nacimiento, telefono, ubicacion, correo, pass } = req.body;
 
-    const edad = differenceInYears((new Date()), (new Date(nacimiento)));
-
     // aqui creo el modelo del objeto que usaré para crear el usuario, en cada propiedad le doy como valor las constantes que destructure anteriormente
     const userNew = {
         nombre: nombre,
         nacimiento: nacimiento,
-        edad: edad,
         telefono: telefono,
         ubicacion: ubicacion,
         correo: correo,

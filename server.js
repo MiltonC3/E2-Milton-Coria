@@ -1,5 +1,5 @@
 const { app, PORT } = require("./app.js");
-require("./database/conexion").conexion();
+require("./database/conexion.js").conexion();
 
 const server = app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);

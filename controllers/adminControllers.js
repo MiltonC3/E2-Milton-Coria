@@ -22,21 +22,6 @@ function navAdmin(class1, class2, class3, class4) {
 }
 
 // Aqui renderizo la pagina de ayuda al entrar en el enlace /cleint
-const pageClient = async (req, res) => {
-    const pageTitle = "Bienvenido Cliente - Cabañas Bello Atardecer";
-
-    // const db = await client.db("clientes").collection("cuentas").find({}).toArray();
-
-    //* await client.db("clientes").collection("cuentas").find({}).toArray();
-    //* await client.db("clientes").collection("reservas").find({}).toArray();
-    //* await client.db("clientes").collection("consultas").find({}).toArray();
-
-    res.render("client", {
-        title: pageTitle,
-    });
-};
-
-// Aqui renderizo la pagina de ayuda al entrar en el enlace /cleint
 const pageAdmin = (req, res) => {
     const pageTitle = "Bienvenido Administrador - Cabañas Bello Atardecer";
 
@@ -217,14 +202,23 @@ const pageAdminConsultas = (req, res) => {
 };
 
 const deleteAdminClientes = async (req, res) => {
-  const correoAEliminar = req.body
+    const datos = req.body;
+    const datosRemove = datos.removeClients;
 
-  await client.db("clientes").collection("cuentas").deleteOne(correoAEliminar);
-}
+    const usuarioEliminado = await client.db("clientes").collection("cuentas").deleteOne({correo: datosRemove});
 
-// exportando como modulo pageClient para que la ruta /client lo reciba en el archivo userRoutes y pageAdmin en la ruta /admin
+    const usuario = await client
+        .db("administradores")
+        .collection("cuentas")
+        .findOne({ correo: datos.admin });
+
+    const listaClientes = await client.db("clientes").collection("cuentas").find({}).toArray();
+
+    res.json({login: usuario, listaClientes: listaClientes});
+};
+
+// exportando como modulo pageAdmin en la ruta /admin
 module.exports = {
-    pageClient,
     pageAdmin,
     pageAdminClientes,
     deleteAdminClientes,

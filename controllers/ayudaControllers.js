@@ -3,7 +3,7 @@
 const pageAyuda = (req, res) => {
     const pageTitle = "Ayuda - Cabañas Bello Atardecer";
 
-    res.render("ayuda", { title: pageTitle });
+    res.render("ayuda", { title: pageTitle, showFooter: true });
 };
 
 // ruta GET - /ayuda
