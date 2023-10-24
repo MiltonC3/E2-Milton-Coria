@@ -1,10 +1,10 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 require("dotenv").config();
 
 const MONGOLOCAL = process.env.MONGO_URL_LOCAL;
 const MONGOATLAS = process.env.MONGO_URL_ATLAS;
 
-const client = new MongoClient(MONGOATLAS);
+const client = new MongoClient(MONGOLOCAL);
 
 async function conexion() {
     try {
@@ -18,4 +18,5 @@ async function conexion() {
 module.exports = {
     client,
     conexion,
+    ObjectId
 };

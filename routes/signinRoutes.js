@@ -12,15 +12,12 @@ const {
 } = require("../controllers/signinControllers");
 
 router.get("/signin", pageSignin);
-
 router.post("/signin", userSignin);
+router.delete("/signout", userOut);
 
 router.get("/userFront", userFront);
 
-router.get("/signout", userOut);
-
 router.get('/recoverpass', pagePassRecover)
-
-router.post('/recoverpass', userPass)
+router.put('/recoverpass', userPass)
 
 module.exports = router;

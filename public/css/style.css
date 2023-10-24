@@ -681,6 +681,7 @@ body::-webkit-scrollbar-thumb {
     margin-bottom: 0.5rem;
     text-align: center;
     color: rgb(244, 244, 244);
+    caret-color: rgb(216, 216, 216);
 }
 .user__datos--input:focus {
     outline: #9fcac1 1px solid;
@@ -695,6 +696,13 @@ body::-webkit-scrollbar-thumb {
     width: 80%;
     position: relative;
     left: 10%;
+}
+.link-admin {
+    color: rgb(23, 23, 23) !important;
+}
+.link-admin-active {
+    color: rgb(244, 244, 244) !important;
+    background-color: #748d81 !important;
 }
 .admin__h1 {
     text-align: center;

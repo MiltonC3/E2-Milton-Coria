@@ -1,4 +1,5 @@
 // Aqui renderizo la pagina de ayuda al entrar en el enlace /ayuda
+const { client, ObjectId } = require("../database/conexion");
 
 const pageAyuda = (req, res) => {
     const pageTitle = "Ayuda - Cabañas Bello Atardecer";

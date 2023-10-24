@@ -1,4 +1,5 @@
 // Aqui renderizo la pagina de ayuda al entrar en el enlace /
+const { client, ObjectId } = require("../database/conexion");
 
 const pageInicio = (req, res) => {
     // Aqui estoy enviando el titulo de la pagina de inicio al handellbars para que asi en cada pagina tenga un distinto titulo

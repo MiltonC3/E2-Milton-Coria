@@ -1,4 +1,4 @@
-function menu(name, user) {
+const menu = (name, user) => {
     const navUl = document.getElementById("nav");
 
     // aqui renderizo el nav con los parametros que indique la funcion para la interfaz de usuario
@@ -18,10 +18,10 @@ function menu(name, user) {
 <li class="header__li li-btnDos">
     <button id="signout" onclick="alertSignOut()" class="header__a--btn">Cerrar sesión</button>
 </li>`;
-}
+};
 
 // esta funcion tiene como tarea distinguir en cada pagina con un color distinto del texto en el nav para que sea mas interactivo
-function activeMenu(nav1, nav2, nav3, nav4, nav5) {
+const activeMenu = (nav1, nav2, nav3, nav4, nav5) => {
     const navUno = document.getElementById(nav1);
     const navDos = document.getElementById(nav2);
     const navTres = document.getElementById(nav3);
@@ -43,7 +43,7 @@ function activeMenu(nav1, nav2, nav3, nav4, nav5) {
     rutaRelativa === `/${nav5}`
         ? navCinco.classList.add("header__a--active")
         : "";
-}
+};
 
 // aqui llamo la funcion para que en cada pagina se realize lo pedido de distinguir en el nav en la ruta que me encuentro
 activeMenu("inicio", "reservar", "ayuda", "signin", "signup");

@@ -1,9 +1,8 @@
 // aqui requiero el mongo para interactuar con la base de datos
-const { client } = require("../database/conexion");
+const { client, ObjectId } = require("../database/conexion");
 
 let admin = {
-    correo: "miltoncoria03@gmail.com",
-    pass: "12345678",
+    correo: "miltoncoria03@gmail.com"
 };
 
 // Aqui renderizo la pagina de ayuda al entrar en el enlace /signup

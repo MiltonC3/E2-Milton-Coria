@@ -1,6 +1,21 @@
 <main class="main__admin">
 
-    {{{ nav }}}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination m-5 justify-content-center text-dark">
+            <li class="page-item user__navigation">
+                <a class="page-link p-2 link-admin {{navAdminDatos}}" href="/admin">Mis datos</a>
+            </li>
+            <li class="page-item user__navigation">
+                <a class="page-link p-2 link-admin {{navAdminClientes}}" href="/adminclientes">Clientes</a>
+            </li>
+            <li class="page-item user__navigation">
+                <a class="page-link p-2 link-admin {{navAdminReservas}}" href="/adminreservas">Reservas</a>
+            </li>
+            <li class="page-item user__navigation">
+                <a class="page-link p-2 link-admin {{navAdminConsultas}}" href="/adminconsultas">Consultas</a>
+            </li>
+        </ul>
+    </nav>
     
     <section id="section-admin">
 

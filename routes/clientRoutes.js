@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { pageClient, nombreClientSave } = require("../controllers/clientControllers");
+const { pageClient, guardarDatosClient } = require("../controllers/clientControllers");
 
 router.get("/client", pageClient);
 
-router.post('/nombreclientsave', nombreClientSave)
+router.put('/clientguardardatos', guardarDatosClient)
 
 module.exports = router;

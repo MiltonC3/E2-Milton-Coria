@@ -1,17 +1,16 @@
 // aqui requiero el mongo para interactuar con la base de datos
-const { client } = require("../database/conexion");
+const { client, ObjectId } = require("../database/conexion");
 
 // declaro la varible afuera para que de esa forma voy interactuando en distintas funciones con el login y asi pueda ir cambiando su valor dependiendo lo que necesite
 let login;
 
-let listaClientes;
+// let listaClientes;
 
 let newPass;
 
 // aqui creo el modelo del objeto será el admin y con condiciones le dare el permiso de admin o cliente en el caso que no coincida con este objeto
 let admin = {
-    correo: "miltoncoria03@gmail.com",
-    pass: "12345678",
+    correo: "miltoncoria03@gmail.com"
 };
 
 // Aqui renderizo la pagina de ayuda al entrar en el enlace /signin
@@ -45,7 +44,14 @@ const userSignin = async (req, res) => {
         .collection("cuentas")
         .findOne({ correo: user.correo, pass: user.pass });
 
-    listaClientes = user.correo === admin.correo ? await client.db("clientes").collection("cuentas").find({}).toArray(): undefined;
+    // listaClientes =
+    //     user.correo === admin.correo
+    //         ? await client
+    //               .db("clientes")
+    //               .collection("cuentas")
+    //               .find({})
+    //               .toArray()
+    //         : undefined;
 
     //* await client.db("clientes").collection("cuentas").find({}).toArray();
     //* await client.db("clientes").collection("reservas").find({}).toArray();
@@ -75,8 +81,11 @@ const userSignin = async (req, res) => {
 // userFront esta tanto en el servidor como en front end, desde aqui le respondo como json la variable login que contiene el usuario encontrado
 const userFront = async (req, res) => {
     if (login !== "" && login !== null) {
-        res.json({ login: login, listaClientes: listaClientes});
+        res.json({ login: login });
     }
+    // } else if (listaClientes !== undefined) {
+    //     res.json({ login: login, listaClientes: listaClientes });
+    // }
 };
 
 // userOut tiene la funcion de que el la variable login se vacie y de esa forma el usuario encontrado se elimine y cumpliria la funcion de cerrar sesion,ya que el userFront no responderia nada al frontend y asi desde el front no se cumpla las condiciones para usar la interfaz de usuario
