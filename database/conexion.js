@@ -4,7 +4,7 @@ require("dotenv").config();
 const MONGOLOCAL = process.env.MONGO_URL_LOCAL;
 const MONGOATLAS = process.env.MONGO_URL_ATLAS;
 
-const client = new MongoClient(MONGOLOCAL);
+const client = new MongoClient(MONGOATLAS);
 
 async function conexion() {
     try {
