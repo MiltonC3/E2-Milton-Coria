@@ -32,10 +32,7 @@ const userSignin = async (req, res) => {
     };
 
     // Busco la base de datos usando client el cual pedi al principio
-    const db =
-        user.correo === admin.correo
-            ? client.db("administradores")
-            : client.db("clientes");
+    const db = client.db("users");
 
     // Aqui cambio el valor de la variable que declare al prinicipio por el usuario encontrado en la base de datos, entonces si lo encuentra en la db se guardara en la variable login para despues con el nuevo valor realizar distintas cosas
     // 1- Primero aqui busco la coleccion Cuentas
@@ -43,15 +40,6 @@ const userSignin = async (req, res) => {
     login = await db
         .collection("cuentas")
         .findOne({ correo: user.correo, pass: user.pass });
-
-    // listaClientes =
-    //     user.correo === admin.correo
-    //         ? await client
-    //               .db("clientes")
-    //               .collection("cuentas")
-    //               .find({})
-    //               .toArray()
-    //         : undefined;
 
     //* await client.db("clientes").collection("cuentas").find({}).toArray();
     //* await client.db("clientes").collection("reservas").find({}).toArray();
@@ -83,9 +71,6 @@ const userFront = async (req, res) => {
     if (login !== "" && login !== null) {
         res.json({ login: login });
     }
-    // } else if (listaClientes !== undefined) {
-    //     res.json({ login: login, listaClientes: listaClientes });
-    // }
 };
 
 // userOut tiene la funcion de que el la variable login se vacie y de esa forma el usuario encontrado se elimine y cumpliria la funcion de cerrar sesion,ya que el userFront no responderia nada al frontend y asi desde el front no se cumpla las condiciones para usar la interfaz de usuario
@@ -110,10 +95,7 @@ const userPass = async (req, res) => {
     };
 
     // Luego, se determina la base de datos en la que se realizará la actualización de la contraseña..
-    const db =
-        userPassNew.correo === admin.correo
-            ? client.db("administradores")
-            : client.db("clientes");
+    const db = client.db("users")
 
     // Después, se verifica si la contraseña y la confirmación de contraseña son iguales. Si lo son, se realiza la actualización de la contraseña en la colección "cuentas" de la base de datos correspondiente.
     if (

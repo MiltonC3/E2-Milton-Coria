@@ -4,21 +4,18 @@ const router = express.Router();
 const {
     pageAdminDatos,
     pageAdminClientes,
-    adminListaClientes,
-    guardarDatosAdmin,
-    deleteAdminClientes,
     pageAdminReservas,
     pageAdminConsultas,
+    listaClientesAdmin,
+    eliminarClientesAdmin,
 } = require("../controllers/adminControllers");
 
 router.get("/admin", pageAdminDatos);
 router.get("/adminclientes", pageAdminClientes);
-router.put("/adminlistaclientes", adminListaClientes);
 router.get("/adminreservas", pageAdminReservas);
 router.get("/adminconsultas", pageAdminConsultas);
 
-router.put('/adminguardardatos', guardarDatosAdmin)
-
-router.delete("/admindeleteclient", deleteAdminClientes);
+router.put("/adminlistaclientes", listaClientesAdmin);
+router.delete("/admindeleteclient", eliminarClientesAdmin);
 
 module.exports = router;

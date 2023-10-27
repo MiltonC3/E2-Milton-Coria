@@ -11,6 +11,7 @@ const reservarRoutes = require("./routes/reservarRoutes");
 const signinRoutes = require("./routes/signinRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const clientRoutes = require("./routes/clientRoutes");
+const userRoutes = require("./routes/userRoutes");
 const signupRoutes = require("./routes/signupRoutes");
 
 const PORT = process.env.PORT;
@@ -32,6 +33,7 @@ app.use(
     signinRoutes,
     adminRoutes,
     clientRoutes,
+    userRoutes,
     signupRoutes
 );
 

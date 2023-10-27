@@ -1,19 +1,8 @@
-// aqui requiero el mongo para interactuar con la base de datos
 const { client, ObjectId } = require("../database/conexion");
 
 const administradores = ["miltoncoria03@gmail.com"];
 
-// Aqui renderizo la pagina de ayuda al entrar en el enlace /cleint
-const pageClient = async (req, res) => {
-    const pageTitle = "Bienvenido Cliente - Cabañas Bello Atardecer";
-
-    res.render("client", {
-        title: pageTitle,
-        showFooter: true,
-    });
-};
-
-const guardarDatosClient = async (req, res) => {
+const guardarDatos = async (req, res) => {
     const datos = req.body;
 
     const typeUser = (arrayAdmin, paramcorreo) => {
@@ -54,5 +43,46 @@ const guardarDatosClient = async (req, res) => {
     res.json(userResponse);
 };
 
-// exportando como modulo pageClient para que la ruta /client lo reciba en el archivo clientRoutes
-module.exports = { pageClient, guardarDatosClient };
+const eliminarCuenta = async (req, res) => {
+    const idCuenta = req.query.parametro;
+
+    const db = client.db("users").collection("cuentas");
+
+    const deleteCuenta = await db.deleteOne({ _id: ObjectId(idCuenta) });
+};
+
+const cambiarPass = async (req, res) => {
+    const user = req.body.user;
+    const passwords = req.body.passwords;
+
+    const db = client.db("users").collection("cuentas");
+
+    if (
+        passwords.passAnterior === user.pass &&
+        passwords.passAnterior !== passwords.passNueva
+    ) {
+        const newPass = { $set: { pass: passwords.passNueva } };
+
+        const updatePass = await db.updateOne(
+            { _id: ObjectId(user._id) },
+            newPass
+        );
+
+        const userResponse = await db.findOne({ _id: ObjectId(user._id) });
+
+        res.json({
+            login: userResponse,
+            estado: true,
+        });
+    } else {
+        res.json({
+            estado: false,
+        });
+    }
+};
+
+module.exports = {
+    guardarDatos,
+    eliminarCuenta,
+    cambiarPass,
+};

@@ -1,9 +1,7 @@
 // aqui requiero el mongo para interactuar con la base de datos
 const { client, ObjectId } = require("../database/conexion");
 
-let admin = {
-    correo: "miltoncoria03@gmail.com"
-};
+const administradores = ["miltoncoria03@gmail.com"];
 
 // Aqui renderizo la pagina de ayuda al entrar en el enlace /signup
 const pageSignup = (req, res) => {
@@ -17,6 +15,19 @@ const userSignup = async (req, res) => {
     // aqui con el destructuring recibo los datos del objeto del req.body el cual los datos tienen como propiedad el name de los inputs correspondiente
     const { nombre, nacimiento, telefono, ubicacion, correo, pass } = req.body;
 
+    const user = (arrayAdmin, paramcorreo) => {
+        let userAdmin
+        for (let i = 0; i < arrayAdmin.length; i++) {
+            if (paramcorreo === arrayAdmin[i]) {
+                userAdmin = true
+            }
+        }
+
+        let typeUser = userAdmin === true ? "admin" : "client";
+
+        return typeUser;
+    };
+
     // aqui creo el modelo del objeto que usaré para crear el usuario, en cada propiedad le doy como valor las constantes que destructure anteriormente
     const userNew = {
         nombre: nombre,
@@ -25,13 +36,11 @@ const userSignup = async (req, res) => {
         ubicacion: ubicacion,
         correo: correo,
         pass: pass,
+        user: user(administradores, correo),
     };
 
     // Busco la base de datos usando client el cual pedi al principio
-    const db =
-        userNew.correo === admin.correo
-            ? client.db("administradores")
-            : client.db("clientes");
+    const db = client.db("users");
 
     // Busco si el usuario que intento crear ya se encuentra en la base de datos
     const correoExistente = await db
@@ -42,10 +51,7 @@ const userSignup = async (req, res) => {
         .findOne({ pass: userNew.pass });
 
     // El código anterior verifica si ya existe una cuenta con los datos ingresados por el usuario. Si no existe una cuenta, se inserta en la base de datos y se redirige al usuario a la página de inicio de sesión. Si ya existe una cuenta con los mismos datos, se muestra un mensaje de error utilizando la biblioteca SweetAlert y se vuelve a cargar la página de registro con el mensaje de error.
-    if (
-        correoExistente === null &&
-        passExistente === null
-    ) {
+    if (correoExistente === null && passExistente === null) {
         await db.collection("cuentas").insertOne(userNew);
 
         res.redirect("/signin");
