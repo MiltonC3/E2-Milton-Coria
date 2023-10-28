@@ -1,6 +1,3 @@
-menu("signin", "signup", "signin", "signup", "Iniciar sesión", "Crear cuenta");
-activeMenu("signin", "signup");
-
 // Y despues con el fetch interactuo con el servidor recibiendo cosas
 fetch("/userFront", {
     method: "GET",
@@ -39,6 +36,16 @@ fetch("/userFront", {
         } else {
             // si no se encuentra ningun usuario en la data que recibo de la db, vacio el local storage, para que asi tambien cuando le de en signout borre el local storage y cumpla la funcion de cerrar sesion
             localStorage.clear();
+
+            menu(
+                "signin",
+                "signup",
+                "signin",
+                "signup",
+                "Iniciar sesión",
+                "Crear cuenta"
+            );
+            activeMenu("signin", "signup");
         }
     })
     .catch((error) => {
