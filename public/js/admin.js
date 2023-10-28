@@ -274,7 +274,7 @@ if (window.location.pathname === "/admin") {
 
         adminSectionDatos(datos);
 
-        btnDeleteUser(datos, "admin");
+        btnEliminarCuenta(datos, "admin");
 
         btnCambiarPass(datos, "admin");
     });

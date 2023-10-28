@@ -1,33 +1,39 @@
 // Tiene la funcion de cuando el usuario quiera cerrar sesion le salga un alert personalizado de confirmacion y le de la solicitud al servidor de cerrar sesion
-const alertSignOut = () => {
-    Swal.fire({
-        title: "Estás cerrando sesión?",
-        text: "",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Confirmar",
-        cancelButtonText: "Cancelar",
-    }).then((result) => {
-        if (result.isConfirmed) {
-            fetch("/signout", {
-                method: "DELETE",
-            });
+const btnCerrarSesion = () => {
+    const btnSignOut = document.getElementById("signout");
 
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Tus datos fueron guardados correctamente",
-                showConfirmButton: false,
-                timer: 1500,
-            });
+    btnSignOut.onclick = (e) => {
+        e.preventDefault();
 
-            setTimeout(function () {
-                window.location.href = "/";
-            }, 1700);
-        }
-    });
+        Swal.fire({
+            title: "Estás cerrando sesión?",
+            text: "",
+            icon: "question",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Confirmar",
+            cancelButtonText: "Cancelar",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch("/signout", {
+                    method: "DELETE",
+                });
+
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Tus datos fueron guardados correctamente",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+
+                setTimeout(function () {
+                    window.location.href = "/";
+                }, 1700);
+            }
+        });
+    };
 };
 
 const btnGuardarDatos = (user) => {
@@ -140,10 +146,10 @@ const btnGuardarDatos = (user) => {
     };
 };
 
-const btnDeleteUser = (datos, user) => {
-    const btnEliminarCuenta = document.getElementById(`btn-${user}-eliminar`);
+const btnEliminarCuenta = (datos, user) => {
+    const btnDeleteUser = document.getElementById(`btn-${user}-eliminar`);
 
-    btnEliminarCuenta.onclick = () => {
+    btnDeleteUser.onclick = () => {
         Swal.fire({
             title: "Estás seguro de eliminar la cuenta?",
             text: "",
@@ -180,9 +186,9 @@ const btnDeleteUser = (datos, user) => {
 };
 
 const btnCambiarPass = (datos, user) => {
-    const btnCambiarPass = document.getElementById(`btn-${user}-pass`);
+    const btnNewPass = document.getElementById(`btn-${user}-pass`);
 
-    btnCambiarPass.onclick = async () => {
+    btnNewPass.onclick = async () => {
         await Swal.fire({
             title: "Ingresa tu nueva contraseña",
             html:
@@ -215,12 +221,12 @@ const btnCambiarPass = (datos, user) => {
                     })
                     .then(async (data) => {
                         if (data.estado === true) {
+                            localStorage.clear();
+
                             await localStorage.setItem(
                                 "userActualizado",
                                 JSON.stringify({ login: data.login })
                             );
-
-                            localStorage.clear();
 
                             Swal.fire({
                                 position: "top-end",

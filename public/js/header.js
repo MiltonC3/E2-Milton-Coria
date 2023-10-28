@@ -1,4 +1,4 @@
-const menu = (name, user) => {
+const menu = (id1, id2, link1, link2, a1, a2) => {
     const navUl = document.getElementById("nav");
 
     // aqui renderizo el nav con los parametros que indique la funcion para la interfaz de usuario
@@ -13,12 +13,14 @@ const menu = (name, user) => {
     <a id="ayuda" href="/ayuda" class="header__a">Ayuda</a>
 </li>
 <li class="header__li li-btnUno">
-    <a id="${user}" href="/${user}" class="header__a">${name}</a>
+    <a id="${id1}" href="/${link1}" class="header__a">${a1}</a>
 </li>
 <li class="header__li li-btnDos">
-    <button id="signout" onclick="alertSignOut()" class="header__a--btn">Cerrar sesión</button>
+    <a id="${id2}" href="/${link2}" class="header__a">${a2}</a>
 </li>`;
 };
+
+// onclick="alertSignOut()"
 
 // esta funcion tiene como tarea distinguir en cada pagina con un color distinto del texto en el nav para que sea mas interactivo
 const activeMenu = (nav4, nav5) => {
@@ -30,15 +32,15 @@ const activeMenu = (nav4, nav5) => {
 
     var rutaRelativa = window.location.pathname;
 
-    rutaRelativa === "/" ? navUno.classList.add("header__a--active") : "";
-    rutaRelativa === "/reservar"
+    rutaRelativa === "/"
+        ? navUno.classList.add("header__a--active")
+        : rutaRelativa === "/reservar"
         ? navDos.classList.add("header__a--active")
-        : "";
-    rutaRelativa === "/ayuda" ? navTres.classList.add("header__a--active") : "";
-    rutaRelativa === `/${nav4}`
+        : rutaRelativa === "/ayuda"
+        ? navTres.classList.add("header__a--active")
+        : rutaRelativa === `/${nav4}`
         ? navCuatro.classList.add("header__a--active")
-        : "";
-    rutaRelativa === `/${nav5}`
+        : rutaRelativa === `/${nav5}`
         ? navCinco.classList.add("header__a--active")
         : "";
 };

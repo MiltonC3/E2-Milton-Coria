@@ -115,7 +115,7 @@ if (window.location.pathname === "/client") {
 
         clientSection(datos);
 
-        btnDeleteUser(datos, "client");
+        btnEliminarCuenta(datos, "client");
 
         btnCambiarPass(datos, "client");
     });
