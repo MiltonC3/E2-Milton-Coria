@@ -20,8 +20,6 @@ const menu = (id1, id2, link1, link2, a1, a2) => {
 </li>`;
 };
 
-// onclick="alertSignOut()"
-
 // esta funcion tiene como tarea distinguir en cada pagina con un color distinto del texto en el nav para que sea mas interactivo
 const activeMenu = (nav4, nav5) => {
     const navUno = document.getElementById("inicio");

@@ -10,7 +10,7 @@ let newPass;
 
 // aqui creo el modelo del objeto será el admin y con condiciones le dare el permiso de admin o cliente en el caso que no coincida con este objeto
 let admin = {
-    correo: "miltoncoria03@gmail.com"
+    correo: "miltoncoria03@gmail.com",
 };
 
 // Aqui renderizo la pagina de ayuda al entrar en el enlace /signin
@@ -41,10 +41,6 @@ const userSignin = async (req, res) => {
         .collection("cuentas")
         .findOne({ correo: user.correo, pass: user.pass });
 
-    //* await client.db("clientes").collection("cuentas").find({}).toArray();
-    //* await client.db("clientes").collection("reservas").find({}).toArray();
-    //* await client.db("clientes").collection("consultas").find({}).toArray();
-
     // La condicion tiene la funcion de:
     // 1 - if - si no encuentra al usuario ingresado en signin dara un error al usuario y renderizara de vuelta la pagina signin para que el ususario vuelva ingresar su cuenta e intentar loguearse
     // 2 - else - al encontrar el usuario redirecciona a la pagina del inicio y bueno login ya cambio de valor por el usuario encontrado en la base de datos
@@ -68,9 +64,7 @@ const userSignin = async (req, res) => {
 
 // userFront esta tanto en el servidor como en front end, desde aqui le respondo como json la variable login que contiene el usuario encontrado
 const userFront = async (req, res) => {
-    if (login !== "" && login !== null) {
-        res.json({ login: login });
-    }
+    res.json({ login: login });
 };
 
 // userOut tiene la funcion de que el la variable login se vacie y de esa forma el usuario encontrado se elimine y cumpliria la funcion de cerrar sesion,ya que el userFront no responderia nada al frontend y asi desde el front no se cumpla las condiciones para usar la interfaz de usuario
@@ -95,7 +89,7 @@ const userPass = async (req, res) => {
     };
 
     // Luego, se determina la base de datos en la que se realizará la actualización de la contraseña..
-    const db = client.db("users")
+    const db = client.db("users");
 
     // Después, se verifica si la contraseña y la confirmación de contraseña son iguales. Si lo son, se realiza la actualización de la contraseña en la colección "cuentas" de la base de datos correspondiente.
     if (
